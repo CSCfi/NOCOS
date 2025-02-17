@@ -1,0 +1,6 @@
+[console_scripts]
+run_all = scripts.run_all:main
+run_miz = scripts.run_miz:main
+run_msp = scripts.run_msp:main
+run_rio = scripts.run_rio:main
+
