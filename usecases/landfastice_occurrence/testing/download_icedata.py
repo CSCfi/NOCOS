@@ -72,6 +72,10 @@ def request_icedata_boundingbox(activity,experiment,model,date,param):
             "type": "boundingbox",
             #"points" : [[53.55, 2.76], [50.66, 7.86]],
             "points" : [[80., 0], [90., 170.]],
+            #geht nicht "points" : [[70., 290], [85., 355.]],
+            # geht auch nicht "points" : [[70., -70.], [85., -5.]],
+            #"points" : [[70., -5.], [85., -70.]],
+  #  },
     },
 	}
 	print(request)

@@ -5,6 +5,11 @@
 # python3 ~/polytope_examples_GIT/desp-authentication.py
 # in the conda env polytope2025May
 
+import os
+os.chdir('/home/andreag/nocoscode/NOCOS-gitv1/usecases/landfastice_occurrence/testing')
+import sys
+sys.path.append(os.getcwd())
+
 
 import earthkit.data
 import earthkit.plots
@@ -158,8 +163,10 @@ chart = earthkit.plots.Map(domain=arctic_domain)
 # [3]: siconc, timestep 2
 # [4]: siue, timestep 2
 # [5]: sivn, timestep 2
+
 #chart.block(speed, levels=np.arange(0, 0.2,0.01), colors="jet",units="m/s")
 chart.block(fasticetoplot, x='y', y='x',levels=np.arange(0, 1, 0.1), colors="winter")
+#chart.block(fasticetoplot, x='x', y='y',levels=np.arange(0, 1, 0.1), colors="winter")
 
 
 
