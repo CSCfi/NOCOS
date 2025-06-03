@@ -1,3 +1,9 @@
+NOCOSDIR='/home/ilja/NOCOS'
+import sys;import os
+# Add the path to sys.path
+sys.path.append(os.path.abspath(NOCOSDIR))
+
+
 from common.data_fetching import DataFetcher
 from common.processing import MeanSic
 from common.visualization import PlotMeanSIC
@@ -19,8 +25,8 @@ print(os.getcwd())  # where are we ?
 
 broker=DataFetcher()
 
-#data=broker.fetch_data_cachb()
-data=broker.fetch_data_polytope()
+data=broker.fetch_data_cachb()
+#data=broker.fetch_data_polytope()
 
 
 print(data)
