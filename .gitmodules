@@ -1,6 +1,6 @@
 [submodule "applications/NOCOS_DMI"]
-	path = applications/NOCOS_DMI
+	path = legacy/NOCOS_DMI
 	url = https://github.com/dmidk/NOCOS.git
 [submodule "applications/NOCOS_DMI_ridfork"]
-	path = applications/NOCOS_DMI_ridfork
+	path = legacy/NOCOS_DMI_ridfork
 	url = https://github.com/iljamal/NOCOS_rid.git
