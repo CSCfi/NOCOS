@@ -1,0 +1,7 @@
+setup.py
+NOCOS.egg-info/PKG-INFO
+NOCOS.egg-info/SOURCES.txt
+NOCOS.egg-info/dependency_links.txt
+NOCOS.egg-info/entry_points.txt
+NOCOS.egg-info/requires.txt
+NOCOS.egg-info/top_level.txt
