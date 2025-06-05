@@ -18,6 +18,13 @@ By integrating observational data, numerical models, and advanced analytics, NOC
 
 ---
 
+## Common Tools
+
+Reusable tools and modules for accessing, processing, and visualizing Climate DT sea ice data are developed and maintained in the [`common/`](common/README.md) directory.  
+These shared utilities support various use cases across the NOCOS DT project.
+
+For more details and usage instructions, see the [Common Tools README](common/README.md).
+
 ## Use Cases
 
 NOCOS DT is organized around concrete Use Cases reflecting real-world challenges.  
