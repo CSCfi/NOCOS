@@ -7,7 +7,7 @@ Through a set of practical use cases, the project demonstrates how integrated da
 
 ## Table of Contents
 - [NOCOS DT project](#project-goal)
-- []
+- [_ProjectLore_](#further-information)
 - [NOCOS DT software](#nocos-dt-software-nocos_dt_soft)
 - [Use cases](#use-cases)
 
@@ -24,7 +24,7 @@ By integrating observational data, numerical models, and advanced analytics, NOC
 
 
 ---
-# NOCOS DT software `NOCOS_DT_soft`
+# NOCOS DT software 
 
 ## Installation instructions
 
