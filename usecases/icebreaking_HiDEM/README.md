@@ -11,13 +11,13 @@ _Traditionally, sea ice dynamics have been modeled using continuum-based methods
 ## Overview Image
 
 <!-- Link to image illustrating the use case (optional) -->
-![Overview image](image/Break3.png) <!-- Replace with actual image path or link -->
+![Overview image](image/HiDEM_poster.png) <!-- Replace with actual image path or link -->
 
 ## Technical Description
 
 <!-- Place holder for technical description -->
 [Describe the scientific, computational, or methodological background relevant for this use case.  
-Include information about the data used, processing steps, and any unique aspects.]
+Include information about the data used, processing steps, and any unique aspects.  e.g  How to get the picture above... ]
 
 ## Software Description
 
