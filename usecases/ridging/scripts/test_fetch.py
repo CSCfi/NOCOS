@@ -1,4 +1,4 @@
-NOCOSDIR='/home/ilja/NOCOS'
+NOCOSDIR='/home/ilja/NOCOS_locdev/NOCOS/'
 import sys
 import os
 
@@ -10,7 +10,7 @@ from common.data_fetching import DataFetcher
 # Initialize DataFetcher
 broker = DataFetcher()
 # Fetch data
-dataset = broker.fetch_data()
+dataset = broker.fetch_data_polytope()
 # Print dataset summary
 if dataset:
     print(dataset)
