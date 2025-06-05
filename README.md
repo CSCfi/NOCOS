@@ -40,7 +40,7 @@ Each Use Case delivers a dedicated set of tools, data, and documentation, with d
 
 ## Further Information
 
-- [NOCOS Wiki – Use Cases and Factsheets](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/494642347/Use+cases+and+factsheets)
+- [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin)
 
 ---
 
