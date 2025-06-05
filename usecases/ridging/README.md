@@ -33,7 +33,6 @@ Relevant scripts, notebooks, and configuration files for sea ice ridging analysi
 Please refer to the available notebooks and scripts for examples and details on the methodology.
 
 ---
+For a full overview of the NOCOS Digital Twin project  and other use cases, visit the [NOCOS github front page](../../README.md).
 
-For a full overview of the NOCOS Digital Twin project and other use cases, visit the [project front page](../../README.md).
-
-For more information about all use cases and factsheets, see the [NOCOS Wiki – Use Cases and Factsheets](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/494642347/Use+cases+and+factsheets).
+For more information about all use cases and factsheets, see the [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin).
