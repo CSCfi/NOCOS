@@ -6,4 +6,4 @@
 	url = https://github.com/iljamal/NOCOS_rid.git
 [submodule "legacy/HiDEM"]
 	path = legacy/HiDEM
-	url = https://github.com/joeatodd/HiDEM.git
+	url = https://github.com/joeatodd/HiDEM
