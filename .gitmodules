@@ -7,3 +7,6 @@
 [submodule "legacy/HiDEM"]
 	path = legacy/HiDEM
 	url = https://github.com/joeatodd/HiDEM
+[submodule "lib/polytope-examples"]
+	path = lib/polytope-examples
+	url = https://github.com/destination-earth-digital-twins/polytope-examples
