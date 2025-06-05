@@ -29,7 +29,7 @@ This script authenticates a user with the **DESP (Destination Earth Service Plat
 
 2. **Run the script:**
     ```sh
-    python path/to/this_script.py
+    python path/to/desp-authentication.py
     ```
 
 3. **Provide credentials:**

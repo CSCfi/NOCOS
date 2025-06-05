@@ -1,5 +1,8 @@
-# Sea Ice Ridging
+# Use Case: Sea Ice Ridging
 
+## Description
+
+<!-- Place holder for general description of the use case -->
 Sea ice ridging can be hazardous for offshore and coastal construction and significantly limits the servicing and maintenance of offshore facilities. It is important to consider ridged ice–related risks during the design of constructions to assure optimal maintenance and servicing costs for each facility.
 
 Ridged ice forms in areas of high ice dynamics, especially close to the coastal zone—often coinciding with regions of high interest for coastal developers such as wind farms, aquafarms, and Floating Storage Regasification Units (FSRU). Understanding the probability and characteristics of ridged ice occurrence is also essential for safe winter navigation and icebreaking operations.
@@ -10,29 +13,30 @@ Knowledge of expected changes in ridged ice will have considerable social and ec
 - Preventing ice-related hazards for coastal and offshore structures.
 - Informing robust engineering design and risk management for new offshore developments.
 
-## Key Aspects
+## Overview Image
 
-- **Navigational Challenge:**  
-  Ice ridges obstruct winter navigation; relevant information is crucial for ship routing and icebreaker planning.
+<!-- Link to image illustrating the use case (optional) -->
+![Overview image](image_placeholder.png) <!-- Replace with actual image path or link -->
 
-- **Engineering Concern:**  
-  Ice ridges pose significant risks for offshore structures (during construction, planning, and operations), requiring robust and informed designs.
+## Technical Description
+<!-- Place holder for technical description -->
+[Describe the scientific, computational, or methodological background relevant for this use case.  
 
-- **Digital Twin Demonstration in the Gulf of Riga:**  
-  This use case focuses on assessing the potential impacts of sea ice ridging on offshore windfarm development and related ship traffic, including wintertime servicing of wind farms in the Gulf of Riga.
-
-## Methods
-
+Include information about the data used, processing steps, and any unique aspects.]
 - Ridged ice is quantified from local Digital Twin (DT) results by:
   - Implementing a Lagrangian Particle Model.
   - Interpreting high-resolution sea ice state and sea ice drift data.
 
-## Project Structure
 
-Relevant scripts, notebooks, and configuration files for sea ice ridging analysis are organized in this directory.  
-Please refer to the available notebooks and scripts for examples and details on the methodology.
+## Software Description
+
+<!-- List and link the main scripts, notebooks, and tools used in this use case -->
+- [script1.py](script1.py) – [Short description]
+- [notebook_demo.ipynb](notebook_demo.ipynb) – [Short description]
+- [other_tool.py](other_tool.py) – [Short description]
+
+<!-- Add or remove items as needed -->
 
 ---
-For a full overview of the NOCOS Digital Twin project  and other use cases, visit the [NOCOS github front page](../../README.md).
-
-For more information about all use cases and factsheets, see the [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin).
+Back to [NOCOS github front page](../README.md).  
+For more information about NOCOS project, see the [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin).
