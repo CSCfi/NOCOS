@@ -20,13 +20,12 @@ Knowledge of expected changes in ridged ice will have considerable social and ec
 
 ## Technical Description
 <!-- Place holder for technical description -->
-[Describe the scientific, computational, or methodological background relevant for this use case.  
+[Describe the scientific, computational, or methodological background relevant for this use case.  Include information about the data used, processing steps, and any unique aspects.]
+- Ridged ice is quantified from Climate DT
 
-Include information about the data used, processing steps, and any unique aspects.]
 - Ridged ice is quantified from local Digital Twin (DT) results by:
   - Implementing a Lagrangian Particle Model.
   - Interpreting high-resolution sea ice state and sea ice drift data.
-
 
 ## Software Description
 

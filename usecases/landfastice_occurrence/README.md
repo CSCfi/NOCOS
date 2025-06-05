@@ -1,14 +1,20 @@
-# Use Case: [TITLE PLACEHOLDER]
+# Use Case: Landfast Ice Occurances
 
 ## Description
 
 <!-- Place holder for general description of the use case -->
 [Add a brief summary of what this use case addresses and why it is important.]
+Landfast sea ice (LFSI) refers to ice that remains stationary even under wind and ocean forcing, due to anchor points that lock the ice in place.  
+Simulating realistic LFSI is challenging, but understanding its occurrence is crucial:
+
+- Landfast ice enables over-ice travel and the construction of ice roads.
+- It is important for fisheries, as local communities rely on it for fishing.
+- A reduction in LFSI is expected with climate change, affecting both travel and local economies.
 
 ## Overview Image
 
 <!-- Link to image illustrating the use case (optional) -->
-![Overview image](image_placeholder.png) <!-- Replace with actual image path or link -->
+![Overview image](images/LFI_poster.png) <!-- Replace with actual image path or link -->
 
 ## Technical Description
 

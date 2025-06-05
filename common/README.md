@@ -6,6 +6,8 @@ Reusable functions for data loading, processing, and visualization are developed
 
 For more information how to acess ClimateDT data via local or remote machine or using various platforms [visit NOCOS internal webpage](https://wiki.eduuni.fi/spaces/cscRDIcollaboration/pages/539865523/Accessing+Climate+DT+data+instructions+for+NOCOS+DT).
 
+## ClimateDT  database
+See [climate DT cataloguew](https://climate-catalogue.lumi.apps.dte.destination-earth.eu/?root=root)
 
 ## Access to the Destination Earth databases
 To begin  request access to DESP  see [README_desp](README_desp.md).
@@ -38,6 +40,6 @@ These scripts and notebooks provide example workflows for generating maps, time 
 
 
 ---
-For a full overview of the NOCOS Digital Twin project  and other use cases, visit the [NOCOS github front page](../README.md).
+Back to [NOCOS github front page](../README.md).
 
-For more information about all use cases and factsheets, see the [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin).
+For more information about NOCOS project, see the [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin).
