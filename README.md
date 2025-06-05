@@ -5,6 +5,13 @@
 **NOCOS DT** aims to leverage ClimateDT data to deliver relevant information, analyses, and insights on sea ice conditions in the Nordic and Arctic regions.  
 Through a set of practical use cases, the project demonstrates how integrated data and digital twin technologies can address real-world challenges related to sea ice, supporting users ranging from maritime operators to planners and researchers.
 
+## Table of Contents
+- [NOCOS DT project](#project-goal)
+- []
+- [NOCOS DT software](#nocos-dt-software-nocos_dt_soft)
+- [Use cases](#use-cases)
+
+
 ## Project Goal
 
 > **The primary goal of NOCOS DT is to use ClimateDT data to provide  _what do we provide? ... relevant data, analysis, and information_ regarding sea ice through a series of practical use case showcases.**
@@ -17,6 +24,9 @@ By integrating observational data, numerical models, and advanced analytics, NOC
 
 
 ---
+# NOCOS DT software `NOCOS_DT_soft`
+
+## Installation instructions
 
 ## Common Tools
 
