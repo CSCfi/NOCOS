@@ -1,0 +1,46 @@
+<img src="logos/NOCOS-DT_logo_RGB_fullcolour.png" alt="NOCOS DT Logo" width="300"/>
+
+# NOCOS Digital Twin (NOCOS DT) Project
+
+**NOCOS DT** aims to leverage ClimateDT data to deliver relevant information, analyses, and insights on sea ice conditions in the Nordic and Arctic regions.  
+Through a set of practical use cases, the project demonstrates how integrated data and digital twin technologies can address real-world challenges related to sea ice, supporting users ranging from maritime operators to planners and researchers.
+
+## Project Goal
+
+> **The primary goal of NOCOS DT is to use ClimateDT data to provide  _what do we provide? ... relevant data, analysis, and information_ regarding sea ice through a series of practical use case showcases.**
+
+By integrating observational data, numerical models, and advanced analytics, NOCOS DT offers actionable solutions and decision support tailored for a variety of end-users operating in ice-affected waters.
+
+---
+
+## Project Structure
+
+
+---
+
+## Use Cases
+
+NOCOS DT is organized around concrete Use Cases reflecting real-world challenges.  
+Each Use Case delivers a dedicated set of tools, data, and documentation, with details available in the respective subfolders.
+
+| Use Case Name                        | Description                                   | Link to README                                             |
+|--------------------------------------|-----------------------------------------------|-----------------------------------------------------------|
+| Marine Spatial Planning              | Decision support for planning in ice-affected waters | [README](usecases/MarineSpatialPlanning/)                 |
+| RIO                                  | Rapid Ice Operations: ship routing & risk assessment | [README](usecases/RIO/)                                   |
+| icebreaking_HiDEM                    | High-resolution icebreaking modeling          | [README](usecases/icebreaking_HiDEM/README.md)            |
+| landfastice_BreakUpFreezeUp          | Break-up and freeze-up monitoring & prediction| [README](usecases/landfastice_BreakUpFreezeUp/README.md)  |
+| landfastice_occurrence               | Analysis of landfast ice occurrence           | [README](usecases/landfastice_occurrence/)                |
+| marginal-ice-zone                    | Marginal Ice Zone detection and dynamics      | [README](usecases/marginal-ice-zone/README.md)            |
+| ridging                              | Modeling and analysis of sea ice ridging      | [README](usecases/ridging/)                               |
+
+> **Each Use Case includes methods, codes, and documentation tailored for its specific application.  
+> For more details, visit the target README in each use case directory.**
+
+---
+
+## Further Information
+
+- [NOCOS Wiki – Use Cases and Factsheets](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/494642347/Use+cases+and+factsheets)
+
+---
+
