@@ -44,3 +44,21 @@ Each Use Case delivers a dedicated set of tools, data, and documentation, with d
 
 ---
 
+## Partners and Funding
+
+### Partners
+
+<!-- Add partner logos below. Example: -->
+![Partner1 Logo](logos/partner1_logo.png)
+![Partner2 Logo](logos/partner2_logo.png)
+<!-- ... add more as needed ... -->
+
+### Coordinated by
+
+<!-- Add coordinator logo below. Example: -->
+![Coordinator Logo](logos/coordinator_logo.png)
+
+### Funded by
+
+<!-- Add funder logo below. Example: -->
+![Funder Logo](logos/funder_logo.png)
