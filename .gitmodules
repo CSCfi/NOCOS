@@ -10,3 +10,6 @@
 [submodule "lib/polytope-examples"]
 	path = lib/polytope-examples
 	url = https://github.com/destination-earth-digital-twins/polytope-examples
+[submodule "lib/DESP-UserWorkflowService-Templates"]
+	path = lib/DESP-UserWorkflowService-Templates
+	url = https://github.com/SercoSPA/DESP-UserWorkflowService-Templates
