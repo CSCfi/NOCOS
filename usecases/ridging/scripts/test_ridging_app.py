@@ -8,3 +8,4 @@ import matplotlib.pyplot as plt
 
 from common import config
 
+disp('   NOCOS DT // ridging')
