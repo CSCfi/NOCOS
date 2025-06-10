@@ -1,66 +1,9 @@
-NOCOSDIR='/home/ilja/NOCOS_locdev/NOCOS/'
-import sys
-import os
-
-# Add the path to sys.path
-sys.path.append(os.path.abspath(NOCOSDIR))
-
-from common.data_fetching import DataFetcher
-
-# Initialize DataFetcher
-broker = DataFetcher()
-# Fetch data
-dataset = broker.fetch_data_polytope()
-# Print dataset summary
-if dataset:
-    print(dataset)
-
-
-
-# request and download ice data
-from NOCOS_locdev.NOCOS.common.download_icedata_c import request_icedata_polygon, request_icedata, request_icedata_boundingbox
-import inspect
-print(inspect.signature(request_icedata_boundingbox))
-
-
-climateDTmodel="IFS-NEMO"
-REQ_daterange="20200101/to/20200131"  # Example date range
-#dataICE=request_icedata(activity="ScenarioMIP",experiment="SSP3-7.0",model=climateDTmodel,date=REQ_daterange,param="263001/263003/263004")
-#dataICE=request_icedata_polygon(activity="ScenarioMIP",experiment="SSP3-7.0",model=climateDTmodel,date=REQ_daterange,param="263001/263003/263004")
-dataICEbb=request_icedata_boundingbox(activity="ScenarioMIP",experiment="SSP3-7.0",model=climateDTmodel,date=REQ_daterange,param="263001/263000/263003/263004",bbox=[21, 30, 56, 61])
-
-
-
-
-
-
-REQ_daterange="19900101/to/19900101"  # Example date range
-dataICEbb = request_icedata_boundingbox(
-    activity="CMIP6", 
-    experiment="hist" ,
-    model=climateDTmodel,
-    date=REQ_daterange,
-    param="263001" ,#/263002/263003/263004",
-    bbox=[21, 30, 56, 61]
-)
-
-dataICEbb.to_xarray()
-print(dataICEbb)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Example script to fetch historical CMIP6 data using Earthkit Data Polytope
+# This script demonstrates how to fetch data for a specific model and date range.
+# It uses the Earthkit Data library to interact with the Polytope data source.
+# Ensure you have the required packages installed:
+# pip install earthkit-data 
+# pip install earthkit-data-polytope
 
 
 import earthkit.data
@@ -127,5 +70,3 @@ ds = earthkit.data.from_source(
     address="polytope.lumi.apps.dte.destination-earth.eu",
     stream=False
 )
-
-

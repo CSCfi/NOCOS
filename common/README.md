@@ -9,7 +9,19 @@ For more information how to acess ClimateDT data via local or remote machine or 
 ## ClimateDT  database
 See [climate DT cataloguew](https://climate-catalogue.lumi.apps.dte.destination-earth.eu/?root=root)
 
-## Access to the Destination Earth databases
+## Accessing Climate DT Data: Authentication
+
+To access Climate DT data, two authentication methods are supported.  
+Extended example templates and usage instructions are provided in the following external repositories, which are included as submodules:
+
+- [`lib/polytope-examples`](lib/polytope-examples)  
+  [https://github.com/destination-earth-digital-twins/polytope-examples](https://github.com/destination-earth-digital-twins/polytope-examples)
+
+- [`lib/DESP-UserWorkflowService-Templates`](lib/DESP-UserWorkflowService-Templates)  
+  [https://github.com/SercoSPA/DESP-UserWorkflowService-Templates](https://github.com/SercoSPA/DESP-UserWorkflowService-Templates)
+
+Refer to these directories for authentication workflows, code templates, and integration examples.
+
 To begin  request access to DESP  see [README_desp](README_desp.md).
 
 ## Metadata Requests

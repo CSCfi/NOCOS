@@ -1,4 +1,4 @@
-NOCOSDIR='/home/ilja/NOCOS'
+NOCOSDIR='/home/ilja/NOCOS_locdev/NOCOS'
 import sys;import os
 # Add the path to sys.path
 sys.path.append(os.path.abspath(NOCOSDIR))
@@ -10,6 +10,7 @@ from common.visualization import PlotMeanSIC
 import xarray as xr
 import numpy as np
 import matplotlib.pyplot as plt
+
 
 
 from common import config
