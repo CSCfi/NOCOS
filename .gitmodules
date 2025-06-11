@@ -13,3 +13,6 @@
 [submodule "lib/DESP-UserWorkflowService-Templates"]
 	path = lib/DESP-UserWorkflowService-Templates
 	url = https://github.com/SercoSPA/DESP-UserWorkflowService-Templates
+[submodule "usecases/ridging/offshoreIceTrack/LOPI"]
+	path = usecases/ridging/offshoreIceTrack/LOPI
+	url = https://github.com/iljamal/LOPI
