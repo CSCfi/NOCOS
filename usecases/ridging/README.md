@@ -16,7 +16,7 @@ Knowledge of expected changes in ridged ice will have considerable social and ec
 ## Overview Image
 
 <!-- Link to image illustrating the use case (optional) -->
-![Overview image](images/rid_poster.png) <!-- Replace with actual image path or link -->
+![Overview image](images/ridged_plot.png) <!-- Replace with actual image path or link -->
 
 ## Technical Description
 <!-- Place holder for technical description -->
