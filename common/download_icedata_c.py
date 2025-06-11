@@ -4,6 +4,7 @@ def request_icedata_subarea(activity,experiment,model,date,subarea,param):
 		area='85/-80/67/5'
 	else:
 		raise RuntimeError("Unknown subarea: "+ subarea+". Cannot create request.")
+	
 	request = {
 			"activity": activity,
 			"class": "d1",
@@ -20,12 +21,14 @@ def request_icedata_subarea(activity,experiment,model,date,subarea,param):
 			"stream": "clte",
 			"time": "0000",
 			"type": "fc",
-		'grid' : 'O2560', # currently O, F, N grids are supported 
-	'area' : area # e.g. '85/-80/67/5' # maxLAT, minLON, minLAT, maxLON
+		    'grid' : 'O2560', # currently O, F, N grids are supported 
+        	'area' : area # e.g. '85/-80/67/5' # maxLAT, minLON, minLAT, maxLON
 		}
 	print(request)
+
 	#data is an earthkit streaming object but with stream=False will download data immediately 
-	dataICE = earthkit.data.from_source("polytope", "destination-earth", request, address="polytope.lumi.apps.dte.destination-earth.eu", stream=False)
+	dataICE = earthkit.data.from_source("polytope", "destination-earth", request, 
+									 address="polytope.lumi.apps.dte.destination-earth.eu", stream=False)
 	return(dataICE)
 
 
@@ -102,25 +105,25 @@ def request_icedata_subarea(activity,experiment,model,date,subarea,param):
 
 ##story-nudging/{cont|hist|Tplus2.0K} IFS-FESOM (resolution={standard|high}) ends  "2024-10-31",
 
-request = {
-	    "activity": "story-nudging",
-	    "class": "d1",
-	    "dataset": "climate-dt",
-	    "date": "2024-10-31",
-	    #"experiment": "hist",
-	    "experiment": "cont",
-	    #"experiment": "Tplus2.0K",
-	    "expver": "0001",
-	    "generation": "1",
-	    "levtype": "o2d",
-	    "model": "IFS-FESOM",	 
-	    "param": "263001",
-	    "realization": "1",
-	    "resolution": "high",
-	    #"resolution": "standard",
-	    "stream": "clte",
-	    "time": "0000",
-	    "type": "fc",
-    'grid' : 'O2560', # currently O, F, N grids are supported 
-   'area' : '85/-80/67/5', # maxLAT, minLON, minLAT, maxLON
-    }
+# request = {
+# 	    "activity": "story-nudging",
+# 	    "class": "d1",
+# 	    "dataset": "climate-dt",
+# 	    "date": "2024-10-31",
+# 	    #"experiment": "hist",
+# 	    "experiment": "cont",
+# 	    #"experiment": "Tplus2.0K",
+# 	    "expver": "0001",
+# 	    "generation": "1",
+# 	    "levtype": "o2d",
+# 	    "model": "IFS-FESOM",	 
+# 	    "param": "263001",
+# 	    "realization": "1",
+# 	    "resolution": "high",
+# 	    #"resolution": "standard",
+# 	    "stream": "clte",
+# 	    "time": "0000",
+# 	    "type": "fc",
+#     'grid' : 'O2560', # currently O, F, N grids are supported 
+#    'area' : '85/-80/67/5', # maxLAT, minLON, minLAT, maxLON
+#     }
