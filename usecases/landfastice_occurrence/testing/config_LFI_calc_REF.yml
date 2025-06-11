@@ -7,8 +7,10 @@ UseCase: LFI # RIO RID LFI MIZ MSP
 
 LFI:
    fasticeduration: 4 # idays; For how many days ice needs to be stationary to be considered fastice
-   startdate: 2023-04-01
-   enddate: 2023-04-10
+   # startdate: 2023-04-01
+   # enddate: 2023-04-10
+   startdate: 2019-01-01
+   enddate: 2019-02-01
 
 ## Name of the input file(s) containing ice information
 ## You can specify one filename or a string glob in the form "path/to/my/files/*.nc" to merge multiple files (e.g. along time dimension).
