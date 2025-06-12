@@ -43,7 +43,7 @@ Each Use Case delivers a dedicated set of tools, data, and documentation, with d
 | Use Case Name                        | Description                                   | Link to README                                             |
 |--------------------------------------|-----------------------------------------------|-----------------------------------------------------------|
 | Marine Spatial Planning              | Decision support for planning in ice-affected waters | [README](usecases/MarineSpatialPlanning/)                 |
-| RIO                                  | Rapid Ice Operations: ship routing & risk assessment | [README](usecases/RIO/)                                   |
+| Arctic Shipping                       | Risk Index Outcome: ship routing & risk assessment | [README](usecases/RIO/)                                   |
 | icebreaking_HiDEM                    | High-resolution icebreaking modeling          | [README](usecases/icebreaking_HiDEM/README.md)            |
 | landfastice_BreakUpFreezeUp          | Break-up and freeze-up monitoring & prediction| [README](usecases/landfastice_BreakUpFreezeUp/README.md)  |
 | landfastice_occurrence               | Analysis of landfast ice occurrence           | [README](usecases/landfastice_occurrence/)                |
