@@ -7,7 +7,7 @@ Sea ice ridging can be hazardous for offshore and coastal construction and signi
 
 Ridged ice forms in areas of high ice dynamics, especially close to the coastal zone—often coinciding with regions of high interest for coastal developers such as wind farms, aquafarms, and Floating Storage Regasification Units (FSRU). Understanding the probability and characteristics of ridged ice occurrence is also essential for safe winter navigation and icebreaking operations.
 
-Knowledge of expected changes in ridged ice will have considerable social and economic impacts by:
+Knowledge of expected changes in ridged ice will have considerable social and economic impacts by  :
 
 - Increasing the safety of wintertime navigation.
 - Preventing ice-related hazards for coastal and offshore structures.
