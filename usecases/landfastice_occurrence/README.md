@@ -2,6 +2,8 @@
 
 ## Description
 
+Here we change the LFI REadme.
+
 <!-- Place holder for general description of the use case -->
 [Add a brief summary of what this use case addresses and why it is important.]
 Landfast sea ice (LFSI) refers to ice that remains stationary even under wind and ocean forcing, due to anchor points that lock the ice in place.  
