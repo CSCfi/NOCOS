@@ -1,34 +1,70 @@
-def request_icedata_subarea(activity,experiment,model,date,subarea,param):
+def request_icedata_subarea(activity,experiment,model,date,subarea,param,datadir=None):
+	"""
+	This function retrieves ClimateDT data
+	#####
+	- If a datadir is given, the function checks whether the desired data is already existing there.
+	- Otherwise it will send a request to Polytope.
+	- If a datadir is given and data was not existing there, the downloaded data will be saved for later use.
+    """
+	
+	# Set pre-defined download areas
 	import earthkit.data
 	if subarea in ["Greenland","greenland"]:
 		area='85/-80/67/5'
 	else:
 		raise RuntimeError("Unknown subarea: "+ subarea+". Cannot create request.")
 	
-	request = {
-			"activity": activity,
-			"class": "d1",
-			"dataset": "climate-dt",
-			"date": date,
-			"experiment": experiment,
-			"expver": "0001",
-			"generation": "1",
-			"levtype": "o2d",
-			"model": model,
-			"param": param,
-			"realization": "1",
-			"resolution": "high",
-			"stream": "clte",
-			"time": "0000",
-			"type": "fc",
-		    'grid' : 'O2560', # currently O, F, N grids are supported 
-        	'area' : area # e.g. '85/-80/67/5' # maxLAT, minLON, minLAT, maxLON
-		}
-	print(request)
+	# Check if data is already existing on disk
+	filename='icedata_'+activity+'_'+experiment+'_'+model+'_'+date.replace("/","-")+'_'+subarea+'_'+param.replace("/","-")+'.grb'
+	if datadir:
+		print("Looking for previously downloaded data in: "+datadir)
+		print("File name to look for: "+filename)
+		try:
+			dataICE=earthkit.data.from_source("file",datadir+"/"+filename)
+		except FileNotFoundError:
+			# File is not existing, hence download the data
+			requestdata=True
+		else:
+			# No error, hence file was found, hence we don't need to download it
+			print("Loading data from file:"+datadir+"/"+filename)
+			requestdata=False
+	else:
+		requestdata=True
+	
+	# Request data from Polytope
+	if requestdata==True: # No datadir given or file not existing in datadir => Will download data
+		print("No datadir given or no existing data file found. I will request data from Polytope...")
+		request = {
+				"activity": activity,
+				"class": "d1",
+				"dataset": "climate-dt",
+				"date": date,
+				"experiment": experiment,
+				"expver": "0001",
+				"generation": "1",
+				"levtype": "o2d",
+				"model": model,
+				"param": param,
+				"realization": "1",
+				"resolution": "high",
+				"stream": "clte",
+				"time": "0000",
+				"type": "fc",
+				'grid' : 'O2560', # currently O, F, N grids are supported 
+				'area' : area # e.g. '85/-80/67/5' # maxLAT, minLON, minLAT, maxLON
+			}
+		print(request)
 
-	#data is an earthkit streaming object but with stream=False will download data immediately 
-	dataICE = earthkit.data.from_source("polytope", "destination-earth", request, 
-									 address="polytope.lumi.apps.dte.destination-earth.eu", stream=False)
+		# Execute the download request
+		#    data is an earthkit streaming object but with stream=False will download data immediately 
+		dataICE = earthkit.data.from_source("polytope", "destination-earth", request, 
+										address="polytope.lumi.apps.dte.destination-earth.eu", stream=False)
+	
+		# Save data to disk for later use , if "datadir" is given
+		if datadir:
+			print("Saving data to: "+datadir+"/"+filename)
+			dataICE.to_target("file",datadir+"/"+filename)
+	
 	return(dataICE)
 
 
