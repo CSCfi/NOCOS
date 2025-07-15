@@ -6,6 +6,10 @@
 # in the conda env polytope2025May
 
 readin=True
+saveplot=True
+
+startyear='2018'
+endyear='2024'
 
 # Maybe these help in the Interactive window to reload modules?
 # %reload_ext autoreload
@@ -16,7 +20,7 @@ import earthkit.plots
 import earthkit.regrid
 import datetime
 
-saveplot=True
+
 
 ### Load user configurations from file
 import os
@@ -25,7 +29,8 @@ import sys
 sys.path.append(os.getcwd())
 from read_config import read_configfile
 
-icechartsRAW=earthkit.data.from_source("file","/media/volume/data_storage_andrea/icecharts/GreenlandTOPNW_fasticeOCC_2019jan.nc")
+#icechartsRAW=earthkit.data.from_source("file","/media/volume/data_storage_andrea/icecharts/GreenlandTOPNW_fasticeOCC_2019jan.nc")
+icechartsRAW=earthkit.data.from_source("file",'/media/volume/data_storage_andrea/icecharts/GreenlandTOPNW_fastice_JAN_'+startyear+'-'+endyear+'_ymonmean_south.nc')
 icecharts=icechartsRAW.to_xarray() # Needed for date in plot title
 
 
@@ -122,7 +127,7 @@ chart.gridlines(zorder=4)
 chart.legend(label="time-average fast ice coverage [fraction]")
 
 # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
-chart.title("Average fastice occurrence\n in Jan 2019 from icecharts")
+chart.title('Average fastice occurrence\n in Januaries (years '+startyear+'-'+endyear+') from icecharts')
 
 # daterange=date_start.strftime("%Y-%m-%d") +"_" + date_end.strftime("%Y-%m-%d")
 
@@ -132,6 +137,6 @@ import sys
 sys.path.append(os.getcwd())
 import matplotlib.pyplot as plt
 if saveplot:
-    plt.savefig('./plots/AVGfastice-icecharts_2019Jan.png', bbox_inches = 'tight')
+    plt.savefig('./plots/AVGfastice-icecharts_Jan_'+startyear+'-'+endyear+'.png', bbox_inches = 'tight')
 
 chart.show()

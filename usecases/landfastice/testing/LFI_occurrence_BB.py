@@ -9,7 +9,7 @@ readin=True
 plotoneday=False
 plotavg=True
 
-saveplot=True
+saveplot=False
 
 # Maybe these help in the Interactive window to reload modules?
 # %reload_ext autoreload
@@ -20,10 +20,12 @@ import earthkit.plots
 import earthkit.regrid
 import datetime
 
-# for year in range(2018,2025):
-for year in [2019]:
+#for year in range(2018,2025):
+#for year in [2018]: # doesn't exist for hist???
+for year in [2024]:
+#for year in range(2019,2025):
 
-    print("Starting with year"+str(year))
+    print("Starting with year "+str(year))
     ### Load user configurations from file
     import os
     os.chdir('/home/andreag/nocoscode/NOCOS-gitv1/usecases/landfastice_occurrence/testing')
@@ -34,7 +36,7 @@ for year in [2019]:
     configs=read_configfile('config_LFI_calc_REF.yml')
     datastoragedir=configs['datastoragedir']
     fasticeduration= 4 # days
-    climateDTmodel= 'ICON' # "IFS-NEMO" or "ICON"
+    # climateDTmodel= 'ICON' # "IFS-NEMO" or "ICON"
     # climateDTmodel=configs['climateDT']['model'] # "IFS-NEMO" or "ICON"
     date_start=datetime.date(year,1,1)
     date_end=datetime.date(year,2,1)
