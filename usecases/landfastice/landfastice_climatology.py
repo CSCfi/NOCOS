@@ -48,26 +48,11 @@ module_level_variable1 : int
 
 """
 
-
-
-
-
-
-
-
-import utils.functions
-import utils.num3
-
-print(utils.functions.blafunc(5))
-print(utils.num3.mal3(4))
-
-
-
 readin=True
 plotoneday=False
-plotavg=False
+plotavg=True
 
-saveplot=False
+saveplot=True
 
 
 import earthkit.data
@@ -93,6 +78,11 @@ simulationperiod='historical'
 
 # For which month should the climatology be produced? (1-12)
 month=1
+# for month in [1,3,5,11]:
+
+# First and last year of the climatology to be produced
+clima_fromyear=2010
+clima_toyear=2019
 
 # For how many days does ice need to be stationary in order to be considered fastice?
 # Default: 4 days
@@ -119,10 +109,13 @@ if not(mapregion=='Greenland'):
 # Process ClimateDT data for each year
 ######################################
 
+fastice_forechyear=[] # Empty list to collect results for each year
 #for year in [2018]: # doesn't exist for hist???
-for year in [2001]:
-#for year in range(2019,2025):
+# for year in [2001]:
+# for year in range(2010,2020):
+for year in range(clima_fromyear,clima_toyear+1):
 
+    print()
     print("Starting with year "+str(year))
     
     # The start of the month
@@ -135,6 +128,37 @@ for year in [2001]:
     REQ_daterange= REQ_date_start.strftime("%Y%m%d")+"/to/"+REQ_date_end.strftime("%Y%m%d")
     print("Going to download data from "+  REQ_date_start.strftime("%Y%m%d") + " to "+REQ_date_end.strftime("%Y%m%d"))
     
+    # Future projection
+    #####################
+    #ScenarioMIP/SSP3-7.0 ICON ("resolution": "high") starts on "2020-09-01"
+    #ScenarioMIP/SSP3-7.0 ICON ("resolution": "high") ends on "2039-12-31"
+    #ScenarioMIP/SSP3-7.0 IFS-NEMO ("resolution": "high") starts on "2020-01-01"
+    #ScenarioMIP/SSP3-7.0 IFS-NEMO ("resolution": "high") ends on "2039-12-31"
+    # Example:
+    # dataICE=request_icedata_subarea(activity="ScenarioMIP",experiment="SSP3-7.0",model=climateDTmodel,date=REQ_daterange,
+                                # param="263001/263003/263004")
+    
+    # Historical
+    ##################
+    ##CMIP6/hist  ICON (resolution=high) starts "1991-03-01"
+    ##CMIP6/hist  ICON (resolution=high) ends 2019-12-31
+    ##CMIP6/hist IFS-NEMO (resolution=standard) starts "1990-01-01"
+    ##CMIP6/hist IFS-NEMO (resolution=standard) ends "2002-02-28"
+    # Example:
+    # dataICE=request_icedata_subarea(activity="CMIP6",experiment="hist",model=climateDTmodel,date=REQ_daterange,
+    #                             subarea="greenland", param="263001/263003/263004",
+    #                             datadir=datastoragedir)
+
+    # Storyline
+    #################
+    ##story-nudging/{cont|hist|Tplus2.0K} IFS-FESOM (resolution=standard) starts "2017-01-01"
+    ##story-nudging/{cont|hist|Tplus2.0K} IFS-FESOM (resolution=high) starts "2017-03-01"
+    ##story-nudging/{cont|hist|Tplus2.0K} IFS-FESOM (resolution={standard|high}) ends  "2024-10-31",
+    ## cont: Control-1950, hist: Present day, Tplus2.0K: 2K warmer than pre-industrial, about 2040
+    # Example:
+    # dataICE=request_icedata_subarea(activity="story-nudging",experiment=REQexperiment,model=climateDTmodel,date=REQ_daterange,
+    #                             subarea="greenland", param="263001/263003/263004",
+    #                             datadir=datastoragedir)
 
     # Warn if download periods are likely not available
     if simulationperiod=='historical':
@@ -153,63 +177,46 @@ for year in [2001]:
             raise RuntimeWarning("Future data for IFS-NEMO is currently only available between 2020-01-01 and 2039-12-31")
 
 
-    if readin:
-        
-        # Set activity and experiment according to user input
-        if simulationperiod=='historical':
-            REQactivity="CMIP6"
-            REQexperiment="hist"
-        elif simulationperiod=='future':
-            REQactivity="ScenarioMIP"
-            REQexperiment="SSP3-7.0"
+    # Set activity and experiment according to user input
+    if simulationperiod=='historical':
+        REQactivity="CMIP6"
+        REQexperiment="hist"
+    elif simulationperiod=='future':
+        REQactivity="ScenarioMIP"
+        REQexperiment="SSP3-7.0"
 
-        # Retrieve data (SIC, sea ice velocity u, sea ice velocity v)
-        dataICE1month=request_icedata_subarea(activity=REQactivity,experiment=REQexperiment,model=climateDTmodel,
-                                        date=REQ_daterange,subarea=mapregion, param="263001/263003/263004",
-                                        datadir=datastoragedir)
-
-
-        # Future projection
-        #####################
-        #ScenarioMIP/SSP3-7.0 ICON ("resolution": "high") starts on "2020-09-01"
-        #ScenarioMIP/SSP3-7.0 ICON ("resolution": "high") ends on "2039-12-31"
-        #ScenarioMIP/SSP3-7.0 IFS-NEMO ("resolution": "high") starts on "2020-01-01"
-        #ScenarioMIP/SSP3-7.0 IFS-NEMO ("resolution": "high") ends on "2039-12-31"
-
-        # dataICE=request_icedata_subarea(activity="ScenarioMIP",experiment="SSP3-7.0",model=climateDTmodel,date=REQ_daterange,
-                                    # param="263001/263003/263004")
-        
-        # Historical
-        ##################
-        ##CMIP6/hist  ICON (resolution=high) starts "1991-03-01"
-        ##CMIP6/hist  ICON (resolution=high) ends 2019-12-31
-        ##CMIP6/hist IFS-NEMO (resolution=standard) starts "1990-01-01"
-        ##CMIP6/hist IFS-NEMO (resolution=standard) ends "2002-02-28"
-
-        # dataICE=request_icedata_subarea(activity="CMIP6",experiment="hist",model=climateDTmodel,date=REQ_daterange,
-        #                             subarea="greenland", param="263001/263003/263004",
-        #                             datadir=datastoragedir)
-
-        # Storyline
-        #################
-        ##story-nudging/{cont|hist|Tplus2.0K} IFS-FESOM (resolution=standard) starts "2017-01-01"
-        ##story-nudging/{cont|hist|Tplus2.0K} IFS-FESOM (resolution=high) starts "2017-03-01"
-        ##story-nudging/{cont|hist|Tplus2.0K} IFS-FESOM (resolution={standard|high}) ends  "2024-10-31",
-        ## cont: Control-1950, hist: Present day, Tplus2.0K: 2K warmer than pre-industrial, about 2040
-
-        # dataICE=request_icedata_subarea(activity="story-nudging",experiment=REQexperiment,model=climateDTmodel,date=REQ_daterange,
-        #                             subarea="greenland", param="263001/263003/263004",
-        #                             datadir=datastoragedir)
+    # Retrieve data (SIC, sea ice velocity u, sea ice velocity v)
+    dataICE1month=request_icedata_subarea(activity=REQactivity,experiment=REQexperiment,model=climateDTmodel,
+                                    date=REQ_daterange,subarea=mapregion, param="263001/263003/263004",
+                                    datadir=datastoragedir)
 
 
     # After read in:
-    dataICExr=dataICE1month.to_xarray() # Needed for date in plot title
+    # dataICExr=dataICE1month.to_xarray() # Needed for date in plot title
 
-    dataICE=dataICE1month
+    # Calculate average fastice coverage for this month
+    avg_fasticecover_grb = avg_fasticecoverage(dataICE1month,speedthreshold=5e-4,fasticeduration=4)
+    fastice_forechyear.append(avg_fasticecover_grb)
 
-    avg_fasticecover_grb = avg_fasticecoverage(dataICE,speedthreshold=5e-4,fasticeduration=4)
+###
+# End of year loop
+####################
 
-if plotoneday or plotavg:
+
+# Make climatology: Average over the monthly datasets of each year
+fasticeclimatology_numpy=np.mean([grb.to_array() for grb in fastice_forechyear],axis=0)
+# Put data into an empty/random grib object
+fasticeclimatology=dataICE1month[0].clone(values=fasticeclimatology_numpy,
+                                          dataDate=str(clima_fromyear)+"-"+str(clima_toyear),
+                                          name="Avg. fast ice coverage", shortName="fastice", units="",
+                                          stepRange='0') # Check metadata with e.g.: avg_fasticecover_grb.metadata("name")
+
+
+#####################################
+### Plotting fast ice climatology
+#####################################
+
+if plotavg:
     from earthkit.plots.geo import domains
     import earthkit.data
     import earthkit.plots
@@ -227,7 +234,8 @@ if plotoneday or plotavg:
         name="Arctic",
     )
     greenland_domain = domains.Domain(
-        [-1400000, 800000, -2500000, -400000],
+        # [-1400000, 800000, -2500000, -400000],
+        [-1300000, 800000, -2400000, -550000], # E, W, S, N
         crs=ccrs.NorthPolarStereo(central_longitude=-35),
         name="Greenland",
     )
@@ -237,60 +245,9 @@ if plotoneday or plotavg:
         name="Qaanaaq",
     )
 
-##########################################
-### Make plot of fastice conditions on a specific day
-###########################################
-
-if plotoneday:
-
-    #### The field to plot
-    plottimestamp=15
-    fasticetoplot=dataICE[0].clone(values=fasticedata[plottimestamp,:]) # Clone something random to make the field into a grib field again
-
-
-    # Set up the plot
-    chart = earthkit.plots.Map(domain=greenland_domain)
-    # chart = earthkit.plots.Map(domain=qaanaaq_domain)
-
-    # Pcolormesh plot
-    chart.grid_cells(fasticetoplot,interpolate=dict(method='nearest'),
-                    style=earthkit.plots.styles.Style(colors="RdYlBu_r",
-                                                    levels=[0,1,1.001]))
-
-    # Elements on the plot
-    chart.coastlines(resolution='high',zorder=3)
-    chart.land(resolution='high',zorder=2)
-    chart.gridlines(zorder=4)
-    chart.legend(label="Landfast ice [yes/no]") # This is the colorbar
-
-    # Title of the plot
-    plotdate=str(dataICExr.avg_siconc.forecast_reference_time[plottimestamp+fasticeduration-1].values)[0:10]
-    chart.title(str(fasticeduration)+"-day fastice persistence on "+ plotdate +", "+climateDTmodel)
-
-    if saveplot:
-        # Save the plot as png
-        import os
-        os.chdir('/home/andreag/nocoscode/NOCOS-gitv1/usecases/landfastice_occurrence/testing')
-        import sys
-        sys.path.append(os.getcwd())
-        import matplotlib.pyplot as plt
-        plt.savefig('./plots/fastice-'+str(fasticeduration)+'day_'+climateDTmodel+'_'+plotdate+'.png', bbox_inches = 'tight')
-
-    chart.show()
-
-
-##########################################
-# ### Plot average fast ice coverage
-########################################
-
-if plotavg:
 
     # The field to plot
-    # endtimestamp=canvaswithland.shape[0]-fasticeduration
-    # # mean_fasticecover=np.mean(canvaswithland[:,:],axis=0) # average over time -> percentage of fast ice coverage
-    # mean_fasticecover=np.mean(fasticedata[:,:],axis=0) # average over time -> percentage of fast ice coverage
-    # fasticeOCCtoplot=dataICE[((fasticeduration-1)+endtimestamp)*3].clone(values=mean_fasticecover, name="Avg. fast ice coverage", shortName="fastice", units="") # Check metadata with e.g.: fastice.metadata("name")
-    fasticeOCCtoplot=avg_fasticecover_grb
+    fasticeOCCtoplot=fasticeclimatology
     print(fasticeOCCtoplot.ls())
 
 
@@ -299,26 +256,25 @@ if plotavg:
     # chart.grid_cells(fasticeOCCtoplot,interpolate=dict(method='nearest'),
     chart.grid_cells(fasticeOCCtoplot,
                     style=earthkit.plots.styles.Style(colors="jet",
-                                                    levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.001]))
+                                                    # levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.001]))
+                                                    levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.]))
 
     chart.coastlines(resolution='high',zorder=3)
     chart.land(resolution='high',zorder=2)
+    # chart.coastlines(resolution='medium',zorder=3)
+    # chart.land(resolution='medium',zorder=2)
+
     chart.gridlines(zorder=4)
-    chart.legend(label="time-average fast ice coverage [fraction]")
+    chart.legend(label="Average fast ice coverage [fraction]")
 
     # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
     chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n " +
-         "Climatology for" + date_start.strftime("%B") +" YEAR???, "+climateDTmodel+"-"+simulationperiod)
+         "Climatology for" + date_start.strftime("%B") +" "+str(clima_fromyear)+"-"+str(clima_toyear)+", "
+         +climateDTmodel+"-"+simulationperiod)
 
-    # daterange=date_start.strftime("%Y-%m-%d") +"_" + date_end.strftime("%Y-%m-%d")
 
     if saveplot:
-        import os
-        os.chdir('/home/andreag/nocoscode/NOCOS-gitv1/usecases/landfastice_occurrence/testing')
-        import sys
-        sys.path.append(os.getcwd())
         import matplotlib.pyplot as plt
-        # # plt.savefig('./plots/AVGfastice-'+str(fasticeduration)+'day_'+climateDTmodel+'_'+daterange+'.png', bbox_inches = 'tight')
-        # plt.savefig('./plots/AVGfastice-'+str(fasticeduration)+'day_'+climateDTmodel+'-'+REQexperiment+'_'+daterange+'.png', bbox_inches = 'tight')
+        plt.savefig('./images/fasticeclimatology_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'.png', bbox_inches = 'tight')
 
     chart.show()
