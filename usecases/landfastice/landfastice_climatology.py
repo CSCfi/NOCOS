@@ -207,19 +207,32 @@ for year in [2001]:
     dataICE=dataICE1month
 
     # calc_fastice(dataICE,speedthreshold=5e-4,fasticeduration=4)
-    """Calculate landfast ice areas.
+    """Calculate average landfast ice coverage.
 
-    This function determines for each grid cell (vector/healpix) and for each day
-    whether there has been ice with SIC>90% and with
-    ice drift speed < speedthreshold (default 5e-4 m/s) for n days in a row (default 4 days).
-
+    This function determines for each grid cell (vector/healpix) the fraction of time (days) 
+    that this grid cell is covered by landfast ice during the provided time period. 
+    Procedure: 
+    1) For each day, determine whether the ice is 'stationary':
+       * ice drift speed < speedthreshold (default 5e-4 m/s) 
+       * AND SIC > 90% 
+       [Number of time steps = number of days in input dataset]
+    2) A grid cell is considered fastice (true/false) if the ice
+       has been 'stationary' for at least n days in a row (default 4 days).
+       [Number of time steps = number of days in input dataset - fasticeduration - 1]
+    3) Calculate time average of over the given time period
+       [Number of time steps = 1]
+    Result:
+    Average fast ice coverage of the given time period (e.g. 1 month)
+       
     Assumptions about input data dataICE:
     - grb object retrieved from Polytope
     - 3 fields per day, provided in this order: 
        * daily average sea ice concentration (avg_siconc)
        * daily average ice drift speed u-component (avg_siue)
        * daily average ice drift speed v-component (avg_sivn)
-    - number of daily fields available >= fasticeduration (=number of days for which the ice needs to be stationary in order to be considered fast ice)
+    - number of daily fields available in dateICE must be greater or equal fasticeduration.
+      (fasticeduration is the number of days for which the ice needs to be 'stationary' in order to be considered fast ice.)
+    - continuous daily time series without gaps
 
     Parameters
     ----------
@@ -227,17 +240,20 @@ for year in [2001]:
         Dataset from Polytope, including the parameters:
         avg_siconc, avg_siue, and avg_sivn for several days
     speedthreshold : float , optional
-        Daily mean ice drift speed must be below this limit for the ice to be considered 'fast ice'
+        Daily mean ice drift speed must be below this limit for the ice to be considered 'stationary'.
         Default: 5e-4 m/s
     fasticeduration : int, optional
-        For how many days in a row the speed criterion must be fulfilled.
+        For how many days in a row the ice needs to be 'stationary' in order to be considered fastice.
         Default: 4 days
 
     Returns
     -------
-    bool?????
-        number of days in output = number of days in input - fasticeduration - 1
+    grb-object
+        avg_fasticecover_grb: Field with values between 0 and 1 indicating the percentage of time 
+        that the respective grid cell is covered by fastice during the given time period. 
+
     """
+
     speedthreshold=5e-4
     ##### Extract data from grib object
 
@@ -278,6 +294,8 @@ for year in [2001]:
     centertimestepidx=centertimestep*3                           # Index in dataICE representing mid of the month
     avg_fasticecover_grb=dataICE[centertimestep*3].clone(values=avg_fasticecover_numpy, name="Avg. fast ice coverage", shortName="fastice", units="") # Check metadata with e.g.: avg_fasticecover_grb.metadata("name")
 
+
+    # avg_fasticecover_grb = calc_fastice(dataICE,speedthreshold=5e-4,fasticeduration=4)
 
 if plotoneday or plotavg:
     from earthkit.plots.geo import domains
@@ -378,7 +396,7 @@ if plotavg:
 
     # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
     chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n " +
-         "Climatology for" + date_start.strftime("%B") +", "+climateDTmodel+"-"+simulationperiod)
+         "Climatology for" + date_start.strftime("%B") +" YEAR???, "+climateDTmodel+"-"+simulationperiod)
 
     # daterange=date_start.strftime("%Y-%m-%d") +"_" + date_end.strftime("%Y-%m-%d")
 
