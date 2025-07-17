@@ -76,6 +76,8 @@ import earthkit.regrid
 import datetime
 import pandas as pd
 
+from utils.download_icedata_c import request_icedata_subarea
+
 ################
 ## User settings
 ################
@@ -99,7 +101,7 @@ fasticeduration=4 # days; For how many days ice needs to be stationary to be con
 mapregion='Greenland'
 # mapregion='Arctic'
 
-# Directory to store (temporary) data files:
+# Directory to store data files (temporarily):
 datastoragedir='/media/volume/data_storage_andrea/'
 
 ################
@@ -117,7 +119,7 @@ if not(mapregion=='Greenland'):
 ######################################
 
 #for year in [2018]: # doesn't exist for hist???
-for year in [2000]:
+for year in [2001]:
 #for year in range(2019,2025):
 
     print("Starting with year "+str(year))
@@ -150,14 +152,6 @@ for year in [2000]:
             raise RuntimeWarning("Future data for IFS-NEMO is currently only available between 2020-01-01 and 2039-12-31")
 
 
-    # request and download ice data
-    import os
-    os.chdir('/home/andreag/nocoscode/NOCOS-gitv1/')
-    import sys
-    sys.path.append(os.getcwd())
-    from common.download_icedata_c import request_icedata_subarea
-
-
     if readin:
         
         # Set activity and experiment according to user input
@@ -168,7 +162,8 @@ for year in [2000]:
             REQactivity="ScenarioMIP"
             REQexperiment="SSP3-7.0"
 
-        dataICE=request_icedata_subarea(activity=REQactivity,experiment=REQexperiment,model=climateDTmodel,
+        # Retrieve data (SIC, sea ice velocity u, sea ice velocity v)
+        dataICE1month=request_icedata_subarea(activity=REQactivity,experiment=REQexperiment,model=climateDTmodel,
                                         date=REQ_daterange,subarea=mapregion, param="263001/263003/263004",
                                         datadir=datastoragedir)
 
@@ -206,44 +201,83 @@ for year in [2000]:
         #                             datadir=datastoragedir)
 
 
+    # After read in:
+    dataICExr=dataICE1month.to_xarray() # Needed for date in plot title
 
-    dataICExr=dataICE.to_xarray() # Needed for date in plot title
+    dataICE=dataICE1month
 
+    # calc_fastice(dataICE,speedthreshold=5e-4,fasticeduration=4)
+    """Calculate landfast ice areas.
 
-bla
+    This function determines for each grid cell (vector/healpix) and for each day
+    whether there has been ice with SIC>90% and with
+    ice drift speed < speedthreshold (default 5e-4 m/s) for n days in a row (default 4 days).
 
-##### Extract data from grib object
+    Assumptions about input data dataICE:
+    - grb object retrieved from Polytope
+    - 3 fields per day, provided in this order: 
+       * daily average sea ice concentration (avg_siconc)
+       * daily average ice drift speed u-component (avg_siue)
+       * daily average ice drift speed v-component (avg_sivn)
+    - number of daily fields available >= fasticeduration (=number of days for which the ice needs to be stationary in order to be considered fast ice)
 
-siconc=dataICE[0::3].values
-siu=dataICE[1::3].values
-siv=dataICE[2::3].values
+    Parameters
+    ----------
+    dataICE : grb-object
+        Dataset from Polytope, including the parameters:
+        avg_siconc, avg_siue, and avg_sivn for several days
+    speedthreshold : float , optional
+        Daily mean ice drift speed must be below this limit for the ice to be considered 'fast ice'
+        Default: 5e-4 m/s
+    fasticeduration : int, optional
+        For how many days in a row the speed criterion must be fulfilled.
+        Default: 4 days
 
-##### Calculate drift speed
+    Returns
+    -------
+    bool?????
+        number of days in output = number of days in input - fasticeduration - 1
+    """
+    speedthreshold=5e-4
+    ##### Extract data from grib object
 
-import numpy as np
-speed=np.sqrt(siu**2+siv**2)
+    siconc=dataICE[0::3].values
+    siu=dataICE[1::3].values
+    siv=dataICE[2::3].values
 
-##### Calculate areas covered by fast ice"
+    ##### Calculate drift speed
 
-canvaswithland=speed.copy()
-fasticemask=np.logical_and(np.less(speed,5e-4),np.greater(siconc,0.90))
-landmask=np.isnan(canvaswithland)
-watermask=np.logical_and(np.logical_not(landmask),np.logical_not(fasticemask))
-canvaswithland[watermask]=0.
-canvaswithland[fasticemask]=1. # Number of time stamps: user defined date range + fasticeduration
+    import numpy as np
+    speed=np.sqrt(siu**2+siv**2)
 
-def fastice_for_x_days(fasticeN,daysN):
-    # fasticeN shape [days,healpixcells]
-    if daysN==1:
-        return fasticeN
-    else:
-        # fasticeNm1=np.logical_and(fasticeN[0:-1,:],fasticeN[1:,:]) # Has there been fastice today and yesterday?
-        fasticeNm1=np.logical_and(fasticeN[0:-1],fasticeN[1:]) # Has there been fastice today and yesterday?
-        daysNm1=daysN - 1
-        return fastice_for_x_days(fasticeNm1,daysNm1) # Call again for one day less
+    ##### Calculate areas covered by fast ice"
 
+    canvaswithland=speed.copy()
+    fasticemask=np.logical_and(np.less(speed,speedthreshold),np.greater(siconc,0.90)) # True where speed<5e-4 and SIC>90%
+    landmask=np.isnan(canvaswithland)
+    watermask=np.logical_and(np.logical_not(landmask),np.logical_not(fasticemask))
+    canvaswithland[watermask]=0.
+    canvaswithland[fasticemask]=1. # e.g.: Number of time stamps = number of days in month + fasticeduration
 
-fasticedata=fastice_for_x_days(canvaswithland,fasticeduration) # Number of time stamps: user defined date range\n"
+    #### Recursive function to determine where there is fastice for daysN in a row
+    def fastice_for_x_days(fasticeN,daysN):
+        # shape of fasticeN: [days,healpixcells]
+        if daysN==1:
+            return fasticeN
+        else:
+            # fasticeNm1=np.logical_and(fasticeN[0:-1,:],fasticeN[1:,:]) # Has there been fastice today and yesterday?
+            fasticeNm1=np.logical_and(fasticeN[0:-1],fasticeN[1:]) # Has there been fastice today and yesterday?
+            daysNm1=daysN - 1
+            return fastice_for_x_days(fasticeNm1,daysNm1) # Call again for one day less
+
+    fasticedata=fastice_for_x_days(canvaswithland,fasticeduration) # e.g.: Number of time stamps = number of days in month"
+
+    ### Averaging over all days
+    avg_fasticecover_numpy=np.mean(fasticedata[:,:],axis=0)      # average over time -> percentage of fast ice coverage over time
+    centertimestep=fasticeduration-1+int(fasticedata.shape[0]/2) # Number of day in dataICE representing mid of the month
+    centertimestepidx=centertimestep*3                           # Index in dataICE representing mid of the month
+    avg_fasticecover_grb=dataICE[centertimestep*3].clone(values=avg_fasticecover_numpy, name="Avg. fast ice coverage", shortName="fastice", units="") # Check metadata with e.g.: avg_fasticecover_grb.metadata("name")
+
 
 if plotoneday or plotavg:
     from earthkit.plots.geo import domains
@@ -322,10 +356,11 @@ if plotoneday:
 if plotavg:
 
     # The field to plot
-    endtimestamp=canvaswithland.shape[0]-fasticeduration
-    # mean_fasticecover=np.mean(canvaswithland[:,:],axis=0) # average over time -> percentage of fast ice coverage
-    mean_fasticecover=np.mean(fasticedata[:,:],axis=0) # average over time -> percentage of fast ice coverage
-    fasticeOCCtoplot=dataICE[((fasticeduration-1)+endtimestamp)*3].clone(values=mean_fasticecover, name="Avg. fast ice coverage", shortName="fastice", units="") # Check metadata with e.g.: fastice.metadata("name")
+    # endtimestamp=canvaswithland.shape[0]-fasticeduration
+    # # mean_fasticecover=np.mean(canvaswithland[:,:],axis=0) # average over time -> percentage of fast ice coverage
+    # mean_fasticecover=np.mean(fasticedata[:,:],axis=0) # average over time -> percentage of fast ice coverage
+    # fasticeOCCtoplot=dataICE[((fasticeduration-1)+endtimestamp)*3].clone(values=mean_fasticecover, name="Avg. fast ice coverage", shortName="fastice", units="") # Check metadata with e.g.: fastice.metadata("name")
+    fasticeOCCtoplot=avg_fasticecover_grb
     print(fasticeOCCtoplot.ls())
 
 
@@ -342,9 +377,10 @@ if plotavg:
     chart.legend(label="time-average fast ice coverage [fraction]")
 
     # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
-    chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel+"-"+REQexperiment)
+    chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n " +
+         "Climatology for" + date_start.strftime("%B") +", "+climateDTmodel+"-"+simulationperiod)
 
-    daterange=date_start.strftime("%Y-%m-%d") +"_" + date_end.strftime("%Y-%m-%d")
+    # daterange=date_start.strftime("%Y-%m-%d") +"_" + date_end.strftime("%Y-%m-%d")
 
     if saveplot:
         import os
@@ -352,7 +388,7 @@ if plotavg:
         import sys
         sys.path.append(os.getcwd())
         import matplotlib.pyplot as plt
-        # plt.savefig('./plots/AVGfastice-'+str(fasticeduration)+'day_'+climateDTmodel+'_'+daterange+'.png', bbox_inches = 'tight')
-        plt.savefig('./plots/AVGfastice-'+str(fasticeduration)+'day_'+climateDTmodel+'-'+REQexperiment+'_'+daterange+'.png', bbox_inches = 'tight')
+        # # plt.savefig('./plots/AVGfastice-'+str(fasticeduration)+'day_'+climateDTmodel+'_'+daterange+'.png', bbox_inches = 'tight')
+        # plt.savefig('./plots/AVGfastice-'+str(fasticeduration)+'day_'+climateDTmodel+'-'+REQexperiment+'_'+daterange+'.png', bbox_inches = 'tight')
 
     chart.show()
