@@ -73,16 +73,21 @@ from utils.fastice import avg_fasticecoverage
 climateDTmodel='ICON'
 
 # Simulation period ( historical or SSP3-7.0 future scenario)
-simulationperiod='historical'
-# simulationperiod='future'
+# simulationperiod='historical'
+simulationperiod='future'
 
 # For which month should the climatology be produced? (1-12)
 month=1
 # for month in [1,3,5,11]:
 
 # First and last year of the climatology to be produced
-clima_fromyear=2010
-clima_toyear=2019
+# # ICON-historical
+# clima_fromyear=2010
+# clima_toyear=2019
+# ICON-future
+clima_fromyear=2030
+clima_toyear=2039
+
 
 # For how many days does ice need to be stationary in order to be considered fastice?
 # Default: 4 days
@@ -269,7 +274,7 @@ if plotavg:
 
     # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
     chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n " +
-         "Climatology for" + date_start.strftime("%B") +" "+str(clima_fromyear)+"-"+str(clima_toyear)+", "
+         "Climatology for " + date_start.strftime("%B") +" "+str(clima_fromyear)+"-"+str(clima_toyear)+", "
          +climateDTmodel+"-"+simulationperiod)
 
 
