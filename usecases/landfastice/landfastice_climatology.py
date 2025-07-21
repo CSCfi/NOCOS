@@ -60,6 +60,7 @@ import earthkit.plots
 import earthkit.regrid
 import datetime
 import pandas as pd
+import numpy as np
 
 from utils.download_icedata_c import request_icedata_subarea
 from utils.fastice import avg_fasticecoverage
@@ -69,8 +70,8 @@ from utils.fastice import avg_fasticecoverage
 ################
 
 # ClimateDT model (ICON or IFS-NEMO)
-# model='IFS-NEMO'
-climateDTmodel='ICON'
+climateDTmodel='IFS-NEMO'
+# climateDTmodel='ICON'
 
 # Simulation period ( historical or SSP3-7.0 future scenario)
 # simulationperiod='historical'
