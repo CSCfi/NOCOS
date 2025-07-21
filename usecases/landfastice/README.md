@@ -2,21 +2,22 @@
 
 ## Description
 
-Here we change the LFI REadme.
-
 <!-- Place holder for general description of the use case -->
 [Add a brief summary of what this use case addresses and why it is important.]
-Landfast sea ice (LFSI) refers to ice that remains stationary even under wind and ocean forcing, due to anchor points that lock the ice in place.  
-Simulating realistic LFSI is challenging, but understanding its occurrence is crucial:
+Landfast ice refers to sea ice that remains stationary even under wind and ocean forcing, due to anchor points that lock the ice in place.  
+Simulating realistic landfast ice is challenging, but understanding its occurrence is crucial:
 
-- Landfast ice enables over-ice travel and the construction of ice roads.
-- It is important for fisheries, as local communities rely on it for fishing.
-- A reduction in LFSI is expected with climate change, affecting both travel and local economies.
+- Local communities e.g. in Greenland rely on landfast ice areas for their traditional hunting and fishing activities, which still from the basis for many people's means of living.
+- Additionally, landfast ice is used by locals in many Arctic regions for travelling, both by means of dog sledges and by constructing ice roads.
+- A reduction in landfast ice is expected with climate change, affecting both travel possibilities and local economies.
+
+The Climate Adaptation Digital Twin simulations (ClimateDT) offer a great opportunity to assess the expected changes in landfast ice coverage because these simulations feature high spatial resolution which is necessary to adequately resolve the coastal areas. 
 
 ## Overview Image
 
 <!-- Link to image illustrating the use case (optional) -->
-![Overview image](images/LFI_poster.png) <!-- Replace with actual image path or link -->
+![historical simulation_example](images/fasticeclimatology_March_2010-2019_ICON-historical.png) 
+![future simulation_example](images/fasticeclimatology_March_2030-2039_ICON-future.png) 
 
 ## Technical Description
 
@@ -24,14 +25,25 @@ Simulating realistic LFSI is challenging, but understanding its occurrence is cr
 [Describe the scientific, computational, or methodological background relevant for this use case.  
 Include information about the data used, processing steps, and any unique aspects.]
 
+This usecase provides a tool to derive landfast ice covered areas from ClimateDT simulations. 
+We define a gridcell in a ClimateDT simulation to be covered by landfast ice if:  
+    a) The daily mean ice drift speed is below a threshold (default 5e-4 m/s). 
+    b) The daily mean sea ice concentration is above 90 %.
+    c) The conditions a) and b) are met for several days in a row (defaut 4 days) 
+
+Problems:
+daily mean speed
+
 ## Software Description
 
 <!-- List and link the main scripts, notebooks, and tools used in this use case -->
-- [script1.py](script1.py) – [Short description]
-- [notebook_demo.ipynb](notebook_demo.ipynb) – [Short description]
-- [other_tool.py](other_tool.py) – [Short description]
+- [landfastice_climatolgoy.py](landfastice_climatology.py) – The main script: Retrieves data from ClimateDT, derives monthly landfast ice climatologies, and saves the results as plots.
+- [utils/](utils/) – Utility functions used in the script
+- [utils/download_icedata_c.py](utils/download_icedata_c.py) – Symbolic link to the common function that downloads ice data from ClimateDT through Polytope
+- [utils/fastice.py](utils/fastice.py) – Function calculating areas covered by landfast ice
+<!-- - [utils/domains???.py](utils/domains???.py) – Set up of plotting domains -->
+- [plot_external_fasticedata.py](plot_external_fasticedata.py) – Script for plotting other landfastice datasets (e.g. used for comparison)
 
-<!-- Add or remove items as needed -->
 
 ---
 
