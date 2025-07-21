@@ -1,4 +1,4 @@
-# Use Case: Landfast Ice Occurances
+# Use Case: Landfast Ice
 
 ## Description
 
@@ -25,14 +25,20 @@ The Climate Adaptation Digital Twin simulations (ClimateDT) offer a great opport
 [Describe the scientific, computational, or methodological background relevant for this use case.  
 Include information about the data used, processing steps, and any unique aspects.]
 
-This usecase provides a tool to derive landfast ice covered areas from ClimateDT simulations. 
+This usecase provides a tool to derive areas covered by landfast ice from ClimateDT simulations. 
 We define a gridcell in a ClimateDT simulation to be covered by landfast ice if:  
-    a) The daily mean ice drift speed is below a threshold (default 5e-4 m/s). 
-    b) The daily mean sea ice concentration is above 90 %.
+    a) The daily mean ice drift speed is below a threshold (default 5e-4 m/s). \
+    b) The daily mean sea ice concentration is above 90 %. \
     c) The conditions a) and b) are met for several days in a row (defaut 4 days) 
 
-Problems:
-daily mean speed
+The script [landfastice_climatolgoy.py](landfastice_climatology.py) provides a tool to:
+ - Download ClimateDT simulation data via Polytope
+ - Derive landfast ice areas
+ - Calculate montly climatologies
+ - Save result as a plot
+ 
+Limitation:
+Be aware that currently (as of July 2025) ClimateDT simulations only provide daily average values for sea ice drift. This might lead to a slight overestimation of landfast ice.
 
 ## Software Description
 
