@@ -36,6 +36,8 @@ daily mean speed
 
 ## Software Description
 
+### Description of files
+
 <!-- List and link the main scripts, notebooks, and tools used in this use case -->
 - [landfastice_climatolgoy.py](landfastice_climatology.py) – The main script: Retrieves data from ClimateDT, derives monthly landfast ice climatologies, and saves the results as plots.
 - [utils/](utils/) – Utility functions used in the script
@@ -44,6 +46,9 @@ daily mean speed
 <!-- - [utils/domains???.py](utils/domains???.py) – Set up of plotting domains -->
 - [plot_external_fasticedata.py](plot_external_fasticedata.py) – Script for plotting other landfastice datasets (e.g. used for comparison)
 
+### Python requirements
+
+The code provided in this usecase does not require any additional Python packages. It is sufficient to install the packages listed in Polytope's [environment.yml](../../lib/polytope-examples/environment.yml) file.
 
 ---
 
