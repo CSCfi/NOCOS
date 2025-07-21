@@ -48,7 +48,7 @@ daily mean speed
 
 ### Python requirements
 
-The code provided in this usecase does not require any additional Python packages. It is sufficient to install the packages listed in Polytope's [environment.yml](../../lib/polytope-examples/environment.yml) file.
+The code provided in this usecase does not require any additional Python packages. It is sufficient to install the packages listed in Polytope's [environment.yml](https://github.com/destination-earth-digital-twins/polytope-examples/blob/868ddbde5139a448ac94e937cd12ec8fe258219b/environment.yml) file.
 
 ---
 
