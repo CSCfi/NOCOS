@@ -13,11 +13,17 @@ Simulating realistic landfast ice is challenging, but understanding its occurren
 
 The Climate Adaptation Digital Twin simulations (ClimateDT) offer a great opportunity to assess the expected changes in landfast ice coverage because these simulations feature high spatial resolution which is necessary to adequately resolve the coastal areas. 
 
-## Overview Image
+## Example: Landfast Ice in March
 
 <!-- Link to image illustrating the use case (optional) -->
-![historical simulation_example](images/fasticeclimatology_March_2010-2019_ICON-historical.png) 
-![future simulation_example](images/fasticeclimatology_March_2030-2039_ICON-future.png) 
+
+Probability that an area is covered by landfast ice in March as simulated by the ICON ClimateDT:
+
+| 2010-2019                            | 2030-2039                          |
+| ----------------------------------- | ----------------------------------- |
+| ![historical_fastice_example](images/fasticeclimatology_March_2010-2019_ICON-historical.png) | ![future_fastice_example](images/fasticeclimatology_March_2030-2039_ICON-future.png) |
+
+
 
 ## Technical Description
 
@@ -37,8 +43,8 @@ The script [landfastice_climatolgoy.py](landfastice_climatology.py) provides a t
  - Calculate montly climatologies
  - Save result as a plot
  
-Limitation:
-Be aware that currently (as of July 2025) ClimateDT simulations only provide daily average values for sea ice drift. This might lead to a slight overestimation of landfast ice.
+> [!NOTE]
+> Be aware that currently (as of July 2025) ClimateDT simulations only provide daily average values for sea ice drift. This might lead to a slight overestimation of landfast ice.
 
 ## Software Description
 
