@@ -43,12 +43,11 @@ Each Use Case delivers a dedicated set of tools, data, and documentation, with d
 | Use Case Name                        | Description                                   | Link to README                                             |
 |--------------------------------------|-----------------------------------------------|-----------------------------------------------------------|
 | Marine Spatial Planning              | Decision support for planning in ice-affected waters | [README](usecases/MarineSpatialPlanning/)                 |
-| Arctic Shipping                       | Risk Index Outcome: ship routing & risk assessment | [README](usecases/RIO/)                                   |
-| icebreaking_HiDEM                    | High-resolution icebreaking modeling          | [README](usecases/icebreaking_HiDEM/README.md)            |
-| landfastice_BreakUpFreezeUp          | Break-up and freeze-up monitoring & prediction| [README](usecases/landfastice_BreakUpFreezeUp/README.md)  |
-| landfastice_occurrence               | Analysis of landfast ice occurrence           | [README](usecases/landfastice_occurrence/)                |
-| marginal-ice-zone                    | Marginal Ice Zone detection and dynamics      | [README](usecases/marginal-ice-zone/README.md)            |
-| ridging                              | Modeling and analysis of sea ice ridging      | [README](usecases/ridging/)                               |
+| Arctic Shipping                      | Risk Index Outcome: ship routing & risk assessment | [README](usecases/RIO/)                                   |
+| Icebreaking_HiDEM                    | High-resolution icebreaking modeling          | [README](usecases/icebreaking_HiDEM/README.md)            |
+| Landfast ice                         | Landfast ice occurrence in coastal areas      | [README](usecases/landfastice/)                |
+| Marginal ice zone                    | Marginal Ice Zone detection and dynamics      | [README](usecases/marginal-ice-zone/README.md)            |
+| Ridging                              | Modeling and analysis of sea ice ridging      | [README](usecases/ridging/)                               |
 
 > **Each Use Case includes methods, codes, and documentation tailored for its specific application.  
 > For more details, visit the target README in each use case directory.**
