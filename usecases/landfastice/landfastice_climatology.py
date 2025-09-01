@@ -48,10 +48,7 @@ module_level_variable1 : int
 
 """
 
-readin=True
-plotoneday=False
 plotavg=True
-
 saveplot=True
 
 
@@ -70,24 +67,24 @@ from utils.fastice import avg_fasticecoverage
 ################
 
 # ClimateDT model (ICON or IFS-NEMO)
-climateDTmodel='IFS-NEMO'
-# climateDTmodel='ICON'
+# climateDTmodel='IFS-NEMO'
+climateDTmodel='ICON'
 
 # Simulation period ( historical or SSP3-7.0 future scenario)
-# simulationperiod='historical'
-simulationperiod='future'
+simulationperiod='historical'
+# simulationperiod='future'
 
 # For which month should the climatology be produced? (1-12)
-month=1
+month=3
 # for month in [1,3,5,11]:
 
 # First and last year of the climatology to be produced
-# # ICON-historical
-# clima_fromyear=2010
-# clima_toyear=2019
-# ICON-future
-clima_fromyear=2030
-clima_toyear=2039
+# ICON-historical
+clima_fromyear=2010
+clima_toyear=2019
+# # ICON-future
+# clima_fromyear=2030
+# clima_toyear=2039
 
 
 # For how many days does ice need to be stationary in order to be considered fastice?
@@ -261,8 +258,7 @@ if plotavg:
     # chart = earthkit.plots.Map(domain=qaanaaq_domain)
     # chart.grid_cells(fasticeOCCtoplot,interpolate=dict(method='nearest'),
     chart.grid_cells(fasticeOCCtoplot,
-                    style=earthkit.plots.styles.Style(colors="jet",
-                                                    # levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.001]))
+                    style=earthkit.plots.styles.Style(colors="viridis", extend="both",
                                                     levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.]))
 
     chart.coastlines(resolution='high',zorder=3)
