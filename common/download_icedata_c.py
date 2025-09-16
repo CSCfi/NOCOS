@@ -5,6 +5,12 @@ def request_icedata_subarea(activity,experiment,model,date,subarea,param,datadir
 	- If a datadir is given, the function checks whether the desired data is already existing there.
 	- Otherwise it will send a request to Polytope.
 	- If a datadir is given and data was not existing there, the downloaded data will be saved for later use.
+    
+    Example usage:
+    dataICE=request_icedata_subarea(activity="CMIP6",experiment="hist",model="ICON",
+                                    date="2002-02-28",subarea="greenland", param="263001/263003/263004",
+                                    datadir="/media/volume/")
+
     """
 	
 	# Set pre-defined download areas
