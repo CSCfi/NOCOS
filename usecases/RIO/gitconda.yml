@@ -1,0 +1,6 @@
+name: gitenv
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - git
