@@ -1,0 +1,10 @@
+lxml
+conflator
+earthkit-data
+earthkit-plots
+earthkit-regrid
+cf-units
+kaleido
+lxml
+h3
+rasterio

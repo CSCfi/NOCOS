@@ -17,6 +17,8 @@ def request_icedata_subarea(activity,experiment,model,date,subarea,param,datadir
 	import earthkit.data
 	if subarea in ["Greenland","greenland"]:
 		area='85/-80/67/5'
+	elif subarea in ["Arctic","arctic"]:
+		area='90/-180/70/180'
 	else:
 		raise RuntimeError("Unknown subarea: "+ subarea+". Cannot create request.")
 	
