@@ -1,4 +1,4 @@
-def request_icedata_subarea(activity,experiment,model,date,subarea,param,datadir=None):
+def request_icedata_subarea(activity,experiment,model,date,subarea,param,datadir=None,gridtype=None):
 	"""
 	This function retrieves ClimateDT data
 	#####
@@ -17,13 +17,19 @@ def request_icedata_subarea(activity,experiment,model,date,subarea,param,datadir
 	import earthkit.data
 	if subarea in ["Greenland","greenland"]:
 		area='85/-80/67/5'
+		# Use default gridtype if not specified by the user
+		if not(gridtype):
+			gridtype='F2000'
 	elif subarea in ["Arctic","arctic"]:
 		area='90/-180/70/180'
+		# Use default gridtype if not specified by the user
+		if not(gridtype):
+			gridtype='F512'
 	else:
 		raise RuntimeError("Unknown subarea: "+ subarea+". Cannot create request.")
 	
 	# Check if data is already existing on disk
-	filename='icedata_'+activity+'_'+experiment+'_'+model+'_'+date.replace("/","-")+'_'+subarea+'_'+param.replace("/","-")+'.grb'
+	filename='icedata_'+activity+'_'+experiment+'_'+model+'_'+date.replace("/","-")+'_'+subarea+'_'+gridtype+'_'+param.replace("/","-")+'.grb'
 	if datadir:
 		print("Looking for previously downloaded data in: "+datadir)
 		print("File name to look for: "+filename)
@@ -58,7 +64,7 @@ def request_icedata_subarea(activity,experiment,model,date,subarea,param,datadir
 				"stream": "clte",
 				"time": "0000",
 				"type": "fc",
-				'grid' : 'O2560', # currently O, F, N grids are supported 
+				'grid' : gridtype, # e.g. 'O2560' (octahedral reduced gaussian) or 'F512' (regular gaussian), # currently O, F, N grids are supported
 				'area' : area # e.g. '85/-80/67/5' # maxLAT, minLON, minLAT, maxLON
 			}
 		print(request)
