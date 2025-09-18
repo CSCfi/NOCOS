@@ -46,7 +46,6 @@ def avg_fasticecoverage(dataICE,speedthreshold=5e-4,fasticeduration=4):
 
     """
 
-    speedthreshold=5e-4
     ##### Extract data from grib object
 
     siconc=dataICE[0::3].values
@@ -74,7 +73,9 @@ def avg_fasticecoverage(dataICE,speedthreshold=5e-4,fasticeduration=4):
             return fasticeN
         else:
             # fasticeNm1=np.logical_and(fasticeN[0:-1,:],fasticeN[1:,:]) # Has there been fastice today and yesterday?
-            fasticeNm1=np.logical_and(fasticeN[0:-1],fasticeN[1:]) # Has there been fastice today and yesterday?
+            fasticeNm1=(np.logical_and(fasticeN[0:-1],fasticeN[1:])).astype('float') # Has there been fastice today and yesterday? # float is needed for keeping NaN on land.
+            nanmask=np.logical_and(np.isnan(fasticeN[0:-1]),np.isnan(fasticeN[1:]))
+            fasticeNm1[nanmask]=np.nan
             daysNm1=daysN - 1
             return fastice_for_x_days(fasticeNm1,daysNm1) # Call again for one day less
 

@@ -106,7 +106,7 @@ datastoragedir='/media/volume/data_storage_andrea/'
 ######################
 if not(month in range(1,13)):
     raise ValueError("MONTH must be between 1 and 12")
-if not(mapregion=='Greenland'):
+if mapregion not in ('Greenland'): #,'Arctic'):
     raise NotImplementedError("Not implemented for mapregion: "+mapregion)
 
 # Process ClimateDT data for each year
@@ -207,7 +207,7 @@ for year in range(clima_fromyear,clima_toyear+1):
 
 
 # Make climatology: Average over the monthly datasets of each year
-fasticeclimatology_numpy=np.mean([grb.to_array() for grb in fastice_forechyear],axis=0)
+fasticeclimatology_numpy=np.nanmean([grb.to_array() for grb in fastice_forechyear],axis=0)
 # Put data into an empty/random grib object
 fasticeclimatology=dataICE1month[0].clone(values=fasticeclimatology_numpy,
                                           dataDate=str(clima_fromyear)+"-"+str(clima_toyear),
@@ -277,6 +277,6 @@ if plotavg:
 
     if saveplot:
         import matplotlib.pyplot as plt
-        plt.savefig('./images/fasticeclimatology_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'.png', bbox_inches = 'tight')
+        plt.savefig('./images/fasticeclimatology_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight')
 
     chart.show()
