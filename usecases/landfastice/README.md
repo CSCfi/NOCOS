@@ -21,7 +21,7 @@ Probability that an area is covered by landfast ice in March as simulated by the
 
 | 2010-2019                            | 2030-2039                          |
 | ----------------------------------- | ----------------------------------- |
-| ![historical_fastice_example](images/fasticeclimatology_March_2010-2019_ICON-historical.png) | ![future_fastice_example](images/fasticeclimatology_March_2030-2039_ICON-future.png) |
+| ![historical_fastice_example](images/fasticeclimatology_March_2010-2019_ICON-historical_GreenlandAndInglefield.png) | ![future_fastice_example](images/fasticeclimatology_March_2030-2039_ICON-future_GreenlandAndInglefield.png) |
 
 
 
