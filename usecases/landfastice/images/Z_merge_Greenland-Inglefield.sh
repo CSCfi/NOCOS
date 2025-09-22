@@ -1,6 +1,7 @@
 #!/bin/bash
 
-for filebase in fasticeclimatology_March_2010-2019_ICON-historical fasticeclimatology_March_2030-2039_ICON-future
+#for filebase in fasticeclimatology_March_2010-2019_ICON-historical fasticeclimatology_March_2030-2039_ICON-future
+for filebase in  fasticeclimatology_March_2010-2019_icecharts
 do
 		# Merge Inglefield plot into Greenland plot
 		convert ${filebase}_Greenland.png ${filebase}_Inglefield.png -gravity Center -geometry 256x256+70+5 -composite tmp.png
