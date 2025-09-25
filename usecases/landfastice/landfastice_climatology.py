@@ -82,9 +82,16 @@ month=3
 # ICON-historical
 clima_fromyear=2010
 clima_toyear=2019
-# # ICON-future
+
+# # IFS-NEMO historical, not available yet
+# clima_fromyear=1990
+# clima_toyear=1999
+
+# # ICON/IFS-future
 # clima_fromyear=2030
 # clima_toyear=2039
+
+
 
 
 # For how many days does ice need to be stationary in order to be considered fastice?
@@ -239,7 +246,7 @@ if plotavg:
 
 
     arctic_domain = domains.Domain(
-        [-2800000, 2800000, -2800000, 2800000],
+        [-2300000, 2300000, -2300000, 2300000],
         crs=ccrs.NorthPolarStereo(),
         name="Arctic",
     )
