@@ -58,6 +58,7 @@ import earthkit.regrid
 import datetime
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 from utils.download_icedata_c import request_icedata_subarea
 from utils.fastice import avg_fasticecoverage
@@ -100,11 +101,14 @@ fasticeduration=4 # days; For how many days ice needs to be stationary to be con
 
 # Region to be processed (Greenland or Arctic or Inglefield)
 mapregion='Greenland'
-#mapregion='Arctic'
-#mapregion='Inglefield' # This will download/use data for Greenland
+# mapregion='Arctic'
+# mapregion='Inglefield' # This will download/use data for Greenland
 
 # Directory to store data files (temporarily):
 datastoragedir='/media/volume/data_storage_andrea/'
+
+# Font size for the plot
+plotfontsize=16
 
 ################
 ## End of user settings
@@ -212,7 +216,10 @@ for year in range(clima_fromyear,clima_toyear+1):
     # dataICExr=dataICE1month.to_xarray() # Needed for date in plot title
 
     # Calculate average fastice coverage for this month
+    
+    #test arctic avg_fasticecover_grb = avg_fasticecoverage(dataICE1month,speedthreshold=8e-2,fasticeduration=4)
     avg_fasticecover_grb = avg_fasticecoverage(dataICE1month,speedthreshold=5e-4,fasticeduration=4)
+    
     fastice_forechyear.append(avg_fasticecover_grb)
 
 ###
@@ -287,14 +294,20 @@ if plotavg:
     # chart.coastlines(resolution='medium',zorder=3)
     # chart.land(resolution='medium',zorder=2)
 
+    plt.rcParams.update({'font.size': plotfontsize})
+
     if not mapregion=="Inglefield":
         chart.gridlines(zorder=4)
         chart.legend(label="Average fast ice coverage [fraction]")
 
         # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
-        chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n " +
-            "Climatology for " + date_start.strftime("%B") +" "+str(clima_fromyear)+"-"+str(clima_toyear)+", "
-            +climateDTmodel+"-"+simulationperiod)
+        # Long title
+        # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n " +
+            # "Climatology for " + date_start.strftime("%B") +" "+str(clima_fromyear)+"-"+str(clima_toyear)+", "
+            # +climateDTmodel+"-"+simulationperiod, fontsize=plotfontsize)
+        # Short title
+        chart.title("ClimateDT "+climateDTmodel+" ("+str(clima_fromyear)+"-"+str(clima_toyear)+") ",
+                    fontsize=plotfontsize)
 
     if saveplot:
         import matplotlib.pyplot as plt

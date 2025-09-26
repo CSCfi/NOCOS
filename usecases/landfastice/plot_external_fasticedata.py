@@ -7,6 +7,7 @@ import earthkit.plots
 import datetime
 from earthkit.plots.geo import domains
 import numpy as np
+import matplotlib.pyplot as plt
 
 ################
 ## User settings
@@ -38,6 +39,11 @@ if datasource=="icecharts":
     # Name of latitude/longitude coordinates
     varLON='lon'
     varLAT='lat'
+    # Title to be shown on the plot
+    ## long version
+    #plottitle="Average fastice occurrence\n " +"Climatology for " + monthname+" "+str(clima_fromyear)+"-"+str(clima_toyear)+" from "+datasource
+    # short version
+    plottitle="Ice charts ("+str(clima_fromyear)+"-"+str(clima_toyear)+")"
 elif datasource=="HYCOM-CICE":
     # Filename to plot
     fasticeduration="4"
@@ -47,9 +53,13 @@ elif datasource=="HYCOM-CICE":
     # Name of latitude/longitude coordinates
     varLON='ULON'
     varLAT='ULAT'
+    # Title to be shown on the plot
+    plottitle="Average fastice occurrence\n " +"Climatology for " + monthname+" "+str(clima_fromyear)+"-"+str(clima_toyear)+" from "+datasource
 
-# Title to be shown on the plot
-plottitle="Average fastice occurrence\n " +"Climatology for " + monthname+" "+str(clima_fromyear)+"-"+str(clima_toyear)+" from "+datasource
+
+
+# Font size for the plot
+plotfontsize=16
 
 ################
 ## End of user settings
@@ -117,11 +127,13 @@ for mapregion in ["Greenland", "Inglefield"]:
     chart.coastlines(resolution='high',zorder=3)
     chart.land(resolution='high',zorder=2)
 
+    plt.rcParams.update({'font.size': plotfontsize})
+
     if not mapregion=="Inglefield":
         chart.gridlines(zorder=4)
         chart.legend(label="Average fast ice coverage [fraction]")
         # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
-        chart.title(plottitle)
+        chart.title(plottitle, fontsize=plotfontsize)
 
 
     if saveplot:
