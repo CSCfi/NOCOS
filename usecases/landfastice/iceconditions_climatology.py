@@ -70,9 +70,9 @@ from utils.download_icedata_c import request_icedata_subarea
 
 # Ice parameters to plot
 plotSIC=True
-plotSIT=True
-plotSNOW=True
-plotICEDRIFT=True
+plotSIT=False
+plotSNOW=False
+plotICEDRIFT=False
 
 # Ice parameters to download
 paramSIC=True
@@ -107,9 +107,9 @@ clima_toyear=2039
 
 
 # Region to be processed (Greenland or Arctic or Inglefield)
-mapregion='Greenland'
+# mapregion='Greenland'
 # mapregion='Arctic'
-# mapregion='Inglefield' # This will download/use data for Greenland
+mapregion='Inglefield' # This will download/use data for Greenland
 
 # Directory to store data files (temporarily):
 datastoragedir='/media/volume/data_storage_andrea/'
@@ -369,9 +369,9 @@ if plotmap:
 
         if saveplot:
             import matplotlib.pyplot as plt
-        #     if mapregion=="Inglefield":
-        #         plt.savefig('./images/iceparameters/fasticeclimatology_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight', facecolor='k')
-        #     else:
-            plt.savefig('./images/iceparameters/climatology-'+icevar[4:]+'_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight')
+            if mapregion=="Inglefield":
+                plt.savefig('./images/iceparameters/climatology-'+icevar[4:]+'_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight', facecolor='k')
+            else:
+                plt.savefig('./images/iceparameters/climatology-'+icevar[4:]+'_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight')
 
         chart.show()

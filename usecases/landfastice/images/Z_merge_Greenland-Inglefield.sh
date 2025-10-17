@@ -1,6 +1,9 @@
 #!/bin/bash
 
-for filebase in fasticeclimatology_March_2010-2019_ICON-historical fasticeclimatology_March_2030-2039_ICON-future
+# Only change this script on Pouta, not on the laptop. It will be overwritten by the copy-script!
+
+for filebase in iceparameters/climatology-siconc_March_2010-2019_ICON-historical iceparameters/climatology-siconc_March_2030-2039_ICON-future
+#for filebase in fasticeclimatology_March_2010-2019_ICON-historical fasticeclimatology_March_2030-2039_ICON-future
 #for filebase in  fasticeclimatology_March_2010-2019_icecharts
 do
 		# Merge Inglefield plot into Greenland plot
