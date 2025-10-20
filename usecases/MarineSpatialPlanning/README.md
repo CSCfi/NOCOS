@@ -2,8 +2,8 @@
 
 ## Description
 
-<!-- Place holder for general description of the use case -->
-[Add a brief summary of what this use case addresses and why it is important.]
+Traditionally, Marine Spatial Planning (MSP) databases and platforms include only static information on the seabed, marine infrastructures, habitats and other environmental parameters. Climate change causes quickly changing environmental conditions that should be taken into account in MSP since they have large direct influence on cumulative ecosystem impacts (e.g. Wåhlström et al, 2022) as well as on new potential activities and pressures that become possible, e.g. when sea-ice conditions change. In order to provide information on ocean and sea changes for decision making, new high-resolution ocean and sea-ice model projections will be made available in formats that can be integrated into MSP platforms. Ecosystems do show large sensitivity to biases in the background state, so to provide relevant information on habitat changes caused by climate change it is necessary to adjust climate model data for model biases
+
 ## Marine Spatial Planning (MSP)
 
 In the Baltic Sea, the impact of climate change on marine ecosystems—including changes in sea ice—is greater than all other anthropogenic impacts combined (Wåhlström et al., 2022).  
