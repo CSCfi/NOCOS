@@ -1,50 +1,5 @@
 """Script to calculate monthly climatologies of landfastice coverage from ClimateDT simulations.
 
-This module demonstrates documentation as specified by the `NumPy
-Documentation HOWTO`_. Docstrings may extend over multiple lines. Sections
-are created with a section header followed by an underline of equal length.
-
-Output is saved into subdirectory "images"
-
-Example
--------
-Examples can be given using either the ``Example`` or ``Examples``
-sections. Sections support any reStructuredText formatting, including
-literal blocks::
-
-    $ python example_numpy.py
-
-
-Section breaks are created with two blank lines. Section breaks are also
-implicitly created anytime a new section starts. Section bodies *may* be
-indented:
-
-Notes
------
-    
-    This script requires a valid DESP token. This can be created by running 
-    python3 ~/polytope_examples_GIT/desp-authentication.py
-    in a conda environment with Polytope installed
-    (https://github.com/destination-earth-digital-twins/polytope-examples)
-    
-
-If a section is indented, then a section break is created by
-resuming unindented text.
-
-Attributes
-----------
-module_level_variable1 : int
-    Module level variables may be documented in either the ``Attributes``
-    section of the module docstring, or in an inline docstring immediately
-    following the variable.
-
-    Either form is acceptable, but the two should not be mixed. Choose
-    one convention to document module level variables and be consistent
-    with it.
-
-
-.. _NumPy docstring standard:
-   https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard
 
 """
 
@@ -58,6 +13,7 @@ import earthkit.regrid
 import datetime
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 from utils.download_icedata_c import request_icedata_subarea
 from utils.fastice import avg_fasticecoverage
@@ -82,21 +38,32 @@ month=3
 # ICON-historical
 clima_fromyear=2010
 clima_toyear=2019
-# # ICON-future
+
+# # IFS-NEMO historical, not available yet
+# clima_fromyear=1990
+# clima_toyear=1999
+
+# # ICON/IFS-future
 # clima_fromyear=2030
 # clima_toyear=2039
+
+
 
 
 # For how many days does ice need to be stationary in order to be considered fastice?
 # Default: 4 days
 fasticeduration=4 # days; For how many days ice needs to be stationary to be considered fastice
 
-# Region to be processed (Greenland or Arctic)
+# Region to be processed (Greenland or Arctic or Inglefield)
 mapregion='Greenland'
 # mapregion='Arctic'
+# mapregion='Inglefield' # This will download/use data for Greenland
 
 # Directory to store data files (temporarily):
 datastoragedir='/media/volume/data_storage_andrea/'
+
+# Font size for the plot
+plotfontsize=16
 
 ################
 ## End of user settings
@@ -106,16 +73,13 @@ datastoragedir='/media/volume/data_storage_andrea/'
 ######################
 if not(month in range(1,13)):
     raise ValueError("MONTH must be between 1 and 12")
-if not(mapregion=='Greenland'):
+if mapregion not in ('Greenland', 'Arctic','Inglefield'):
     raise NotImplementedError("Not implemented for mapregion: "+mapregion)
 
 # Process ClimateDT data for each year
 ######################################
 
 fastice_forechyear=[] # Empty list to collect results for each year
-#for year in [2018]: # doesn't exist for hist???
-# for year in [2001]:
-# for year in range(2010,2020):
 for year in range(clima_fromyear,clima_toyear+1):
 
     print()
@@ -188,17 +152,23 @@ for year in range(clima_fromyear,clima_toyear+1):
         REQactivity="ScenarioMIP"
         REQexperiment="SSP3-7.0"
 
+    # Set download area
+    if mapregion in ['Qaanaaq','Inglefield']:
+        downloadregion='Greenland'
+    else:
+        downloadregion=mapregion
+
     # Retrieve data (SIC, sea ice velocity u, sea ice velocity v)
     dataICE1month=request_icedata_subarea(activity=REQactivity,experiment=REQexperiment,model=climateDTmodel,
-                                    date=REQ_daterange,subarea=mapregion, param="263001/263003/263004",
+                                    date=REQ_daterange,subarea=downloadregion, param="263001/263003/263004",
                                     datadir=datastoragedir)
 
 
-    # After read in:
-    # dataICExr=dataICE1month.to_xarray() # Needed for date in plot title
-
     # Calculate average fastice coverage for this month
+    
+    #test arctic avg_fasticecover_grb = avg_fasticecoverage(dataICE1month,speedthreshold=8e-2,fasticeduration=4)
     avg_fasticecover_grb = avg_fasticecoverage(dataICE1month,speedthreshold=5e-4,fasticeduration=4)
+    
     fastice_forechyear.append(avg_fasticecover_grb)
 
 ###
@@ -207,7 +177,7 @@ for year in range(clima_fromyear,clima_toyear+1):
 
 
 # Make climatology: Average over the monthly datasets of each year
-fasticeclimatology_numpy=np.mean([grb.to_array() for grb in fastice_forechyear],axis=0)
+fasticeclimatology_numpy=np.nanmean([grb.to_array() for grb in fastice_forechyear],axis=0)
 # Put data into an empty/random grib object
 fasticeclimatology=dataICE1month[0].clone(values=fasticeclimatology_numpy,
                                           dataDate=str(clima_fromyear)+"-"+str(clima_toyear),
@@ -232,18 +202,17 @@ if plotavg:
 
 
     arctic_domain = domains.Domain(
-        [-2800000, 2800000, -2800000, 2800000],
+        [-2300000, 2300000, -2300000, 2300000],
         crs=ccrs.NorthPolarStereo(),
         name="Arctic",
     )
     greenland_domain = domains.Domain(
-        # [-1400000, 800000, -2500000, -400000],
-        [-1300000, 800000, -2400000, -550000], # E, W, S, N
+        [-1300000, 700000, -2200000, -600000], # W, E, S, N
         crs=ccrs.NorthPolarStereo(central_longitude=-35),
         name="Greenland",
     )
     qaanaaq_domain = domains.Domain(
-        [-300000, 100000, -1600000, -1200000],
+        [-180000, 50000, -1490000, -1330000], # W, E, S, N
         crs=ccrs.NorthPolarStereo(central_longitude=-67),
         name="Qaanaaq",
     )
@@ -254,7 +223,12 @@ if plotavg:
     print(fasticeOCCtoplot.ls())
 
 
-    chart = earthkit.plots.Map(domain=greenland_domain)
+    if mapregion in ["Greenland","greenland"]:
+        chart = earthkit.plots.Map(domain=greenland_domain)
+    elif mapregion in ["Arctic","arctic"]:
+        chart = earthkit.plots.Map(domain=arctic_domain)
+    elif mapregion in ["Qaanaaq","Inglefield"]:
+        chart = earthkit.plots.Map(domain=qaanaaq_domain)
     # chart = earthkit.plots.Map(domain=qaanaaq_domain)
     # chart.grid_cells(fasticeOCCtoplot,interpolate=dict(method='nearest'),
     chart.grid_cells(fasticeOCCtoplot,
@@ -266,17 +240,25 @@ if plotavg:
     # chart.coastlines(resolution='medium',zorder=3)
     # chart.land(resolution='medium',zorder=2)
 
-    chart.gridlines(zorder=4)
-    chart.legend(label="Average fast ice coverage [fraction]")
+    plt.rcParams.update({'font.size': plotfontsize})
 
-    # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
-    chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n " +
-         "Climatology for " + date_start.strftime("%B") +" "+str(clima_fromyear)+"-"+str(clima_toyear)+", "
-         +climateDTmodel+"-"+simulationperiod)
+    if not mapregion=="Inglefield":
+        chart.gridlines(zorder=4)
+        chart.legend(label="Average fast ice coverage [fraction]")
 
+        # Long title
+        # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n " +
+            # "Climatology for " + date_start.strftime("%B") +" "+str(clima_fromyear)+"-"+str(clima_toyear)+", "
+            # +climateDTmodel+"-"+simulationperiod, fontsize=plotfontsize)
+        # Short title
+        chart.title("ClimateDT "+climateDTmodel+" ("+str(clima_fromyear)+"-"+str(clima_toyear)+") ",
+                    fontsize=plotfontsize)
 
     if saveplot:
         import matplotlib.pyplot as plt
-        plt.savefig('./images/fasticeclimatology_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'.png', bbox_inches = 'tight')
+        if mapregion=="Inglefield":
+            plt.savefig('./images/fasticeclimatology_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight', facecolor='k')
+        else:
+            plt.savefig('./images/fasticeclimatology_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight')
 
     chart.show()
