@@ -64,13 +64,7 @@ Each Use Case delivers a dedicated set of tools, data, and documentation, with d
 
 NOCOS DT was funded by the [Nordic Council of Ministers](https://www.norden.org/en/nordic-council-ministers). The consortium consisted of [CSC – IT Center for Science](https://csc.fi/en/) (CSC), [Danish Meteorological Institute](https://www.dmi.dk/) (DMI), [Finnish Meteorological Institute](https://en.ilmatieteenlaitos.fi/) (FMI), [Norwegian Meteorological Institute](https://www.met.no/en) (MetNo), [Swedish Meteorological and Hydrological Institute](https://www.smhi.se/en/) (SMHI), and [Tallinn University of Technology](https://taltech.ee/en/) (TalTech).
 
-<img width="300" height="100" alt="Endorseringslogo RGB EN blå(1)" src="https://github.com/user-attachments/assets/855057fe-4f36-4799-bfe1-659981243256" /> 
-
-<img width="200" height="89" alt="CSC_2012_pien" src="https://github.com/user-attachments/assets/5423f3c1-729f-4924-aeb2-5d50f46d6918" /> 
-
-<img width="205" height="205" alt="DMI_V_C_RGB@3x(1)" src="https://github.com/user-attachments/assets/51fbc506-62eb-43e2-8e12-2bffc8d162bc" />
-<img width="438" height="121" alt="FMI logo(1)" src="https://github.com/user-attachments/assets/9dfab820-4c95-4977-a946-1cefe75a3d71" />
-<img width="245" height="146" alt="TalTech_MeresystInstituut_ENG_Gradient(1)(1)" src="https://github.com/user-attachments/assets/aa23cda6-8ca3-47aa-97a7-82a36d35fcf5" />
+<img width="100%" alt="Funder and partner logos" src="https://github.com/CSCfi/NOCOS/blob/dev/logos/Funder_partners.png?raw=true"/>
 
 
 
