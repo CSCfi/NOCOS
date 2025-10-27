@@ -1,51 +1,5 @@
 """Script to calculate monthly climatologies of ice parameters from ClimateDT simulations.
 
-This module demonstrates documentation as specified by the `NumPy
-Documentation HOWTO`_. Docstrings may extend over multiple lines. Sections
-are created with a section header followed by an underline of equal length.
-
-Output is saved into subdirectory "images"
-
-Example
--------
-Examples can be given using either the ``Example`` or ``Examples``
-sections. Sections support any reStructuredText formatting, including
-literal blocks::
-
-    $ python example_numpy.py
-
-
-Section breaks are created with two blank lines. Section breaks are also
-implicitly created anytime a new section starts. Section bodies *may* be
-indented:
-
-Notes
------
-    
-    This script requires a valid DESP token. This can be created by running 
-    python3 ~/polytope_examples_GIT/desp-authentication.py
-    in a conda environment with Polytope installed
-    (https://github.com/destination-earth-digital-twins/polytope-examples)
-    
-
-If a section is indented, then a section break is created by
-resuming unindented text.
-
-Attributes
-----------
-module_level_variable1 : int
-    Module level variables may be documented in either the ``Attributes``
-    section of the module docstring, or in an inline docstring immediately
-    following the variable.
-
-    Either form is acceptable, but the two should not be mixed. Choose
-    one convention to document module level variables and be consistent
-    with it.
-
-
-.. _NumPy docstring standard:
-   https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard
-
 """
 
 readin=True
@@ -299,14 +253,11 @@ if plotmap:
         name="Arctic",
     )
     greenland_domain = domains.Domain(
-        # [-1400000, 800000, -2500000, -400000],
-        # [-1300000, 800000, -2400000, -550000], # W, E, S, N
         [-1300000, 700000, -2200000, -600000], # W, E, S, N
         crs=ccrs.NorthPolarStereo(central_longitude=-35),
         name="Greenland",
     )
     qaanaaq_domain = domains.Domain(
-        # [-300000, 100000, -1600000, -1200000],
         [-180000, 50000, -1490000, -1330000], # W, E, S, N
         crs=ccrs.NorthPolarStereo(central_longitude=-67),
         name="Qaanaaq",
@@ -328,8 +279,6 @@ if plotmap:
 
         # The field to plot
         icetoplot=icedata_climatology[icevar]
-        # fasticeOCCtoplot=icedata['avg_icespeed'][1,:,:]  
-        # icetoplot=icedata_climatology['avg_icespeed']
 
         # Set up the map
         if mapregion in ["Greenland","greenland"]:

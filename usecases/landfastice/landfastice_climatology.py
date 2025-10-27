@@ -1,50 +1,5 @@
 """Script to calculate monthly climatologies of landfastice coverage from ClimateDT simulations.
 
-This module demonstrates documentation as specified by the `NumPy
-Documentation HOWTO`_. Docstrings may extend over multiple lines. Sections
-are created with a section header followed by an underline of equal length.
-
-Output is saved into subdirectory "images"
-
-Example
--------
-Examples can be given using either the ``Example`` or ``Examples``
-sections. Sections support any reStructuredText formatting, including
-literal blocks::
-
-    $ python example_numpy.py
-
-
-Section breaks are created with two blank lines. Section breaks are also
-implicitly created anytime a new section starts. Section bodies *may* be
-indented:
-
-Notes
------
-    
-    This script requires a valid DESP token. This can be created by running 
-    python3 ~/polytope_examples_GIT/desp-authentication.py
-    in a conda environment with Polytope installed
-    (https://github.com/destination-earth-digital-twins/polytope-examples)
-    
-
-If a section is indented, then a section break is created by
-resuming unindented text.
-
-Attributes
-----------
-module_level_variable1 : int
-    Module level variables may be documented in either the ``Attributes``
-    section of the module docstring, or in an inline docstring immediately
-    following the variable.
-
-    Either form is acceptable, but the two should not be mixed. Choose
-    one convention to document module level variables and be consistent
-    with it.
-
-
-.. _NumPy docstring standard:
-   https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard
 
 """
 
@@ -125,9 +80,6 @@ if mapregion not in ('Greenland', 'Arctic','Inglefield'):
 ######################################
 
 fastice_forechyear=[] # Empty list to collect results for each year
-#for year in [2018]: # doesn't exist for hist???
-# for year in [2001]:
-# for year in range(2010,2020):
 for year in range(clima_fromyear,clima_toyear+1):
 
     print()
@@ -212,9 +164,6 @@ for year in range(clima_fromyear,clima_toyear+1):
                                     datadir=datastoragedir)
 
 
-    # After read in:
-    # dataICExr=dataICE1month.to_xarray() # Needed for date in plot title
-
     # Calculate average fastice coverage for this month
     
     #test arctic avg_fasticecover_grb = avg_fasticecoverage(dataICE1month,speedthreshold=8e-2,fasticeduration=4)
@@ -258,14 +207,11 @@ if plotavg:
         name="Arctic",
     )
     greenland_domain = domains.Domain(
-        # [-1400000, 800000, -2500000, -400000],
-        # [-1300000, 800000, -2400000, -550000], # W, E, S, N
         [-1300000, 700000, -2200000, -600000], # W, E, S, N
         crs=ccrs.NorthPolarStereo(central_longitude=-35),
         name="Greenland",
     )
     qaanaaq_domain = domains.Domain(
-        # [-300000, 100000, -1600000, -1200000],
         [-180000, 50000, -1490000, -1330000], # W, E, S, N
         crs=ccrs.NorthPolarStereo(central_longitude=-67),
         name="Qaanaaq",
@@ -300,7 +246,6 @@ if plotavg:
         chart.gridlines(zorder=4)
         chart.legend(label="Average fast ice coverage [fraction]")
 
-        # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
         # Long title
         # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n " +
             # "Climatology for " + date_start.strftime("%B") +" "+str(clima_fromyear)+"-"+str(clima_toyear)+", "

@@ -85,14 +85,11 @@ arctic_domain = domains.Domain(
     name="Arctic",
 )
 greenland_domain = domains.Domain(
-    # [-1400000, 800000, -2500000, -400000],
-    # [-1300000, 800000, -2400000, -550000], # W, E, S, N
     [-1300000, 700000, -2200000, -600000], # W, E, S, N
     crs=ccrs.NorthPolarStereo(central_longitude=-35),
     name="Greenland",
 )
 qaanaaq_domain = domains.Domain(
-    # [-300000, 100000, -1600000, -1200000],
     [-180000, 50000, -1490000, -1330000], # W, E, S, N
     crs=ccrs.NorthPolarStereo(central_longitude=-67),
     name="Qaanaaq",
@@ -132,7 +129,6 @@ for mapregion in ["Greenland", "Inglefield"]:
     if not mapregion=="Inglefield":
         chart.gridlines(zorder=4)
         chart.legend(label="Average fast ice coverage [fraction]")
-        # chart.title("Average "+str(fasticeduration)+"-day fastice occurrence\n between "+ date_start.strftime("%Y-%m-%d") +" and " + date_end.strftime("%Y-%m-%d")  +", "+climateDTmodel)
         chart.title(plottitle, fontsize=plotfontsize)
 
 
