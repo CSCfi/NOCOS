@@ -3,7 +3,6 @@
 ## Description
 
 <!-- Place holder for general description of the use case -->
-[Add a brief summary of what this use case addresses and why it is important.]
 Landfast ice refers to sea ice that remains stationary even under wind and ocean forcing, due to anchor points that lock the ice in place.  
 Simulating realistic landfast ice is challenging, but understanding its occurrence is crucial:
 
@@ -17,7 +16,7 @@ The Climate Adaptation Digital Twin simulations (ClimateDT) offer a great opport
 
 <!-- Link to image illustrating the use case (optional) -->
 
-Probability that an area is covered by landfast ice in March as simulated by the ICON ClimateDT:
+Probability that an area is covered by landfast ice in March as simulated by the ICON ClimateDT model:
 
 | 2010-2019                            | 2030-2039                          |
 | ----------------------------------- | ----------------------------------- |
@@ -28,8 +27,6 @@ Probability that an area is covered by landfast ice in March as simulated by the
 ## Technical Description
 
 <!-- Place holder for technical description -->
-[Describe the scientific, computational, or methodological background relevant for this use case.  
-Include information about the data used, processing steps, and any unique aspects.]
 
 This usecase provides a tool to derive areas covered by landfast ice from ClimateDT simulations. 
 We define a gridcell in a ClimateDT simulation to be covered by landfast ice if:  
