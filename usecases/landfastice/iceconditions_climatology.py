@@ -1,11 +1,77 @@
 """Script to calculate monthly climatologies of ice parameters from ClimateDT simulations.
 
+iceconditions_climatology.py
+
+Sections in this script:
+    a) User settings
+       The user choose ice parameters and specify certain settings like the
+       ClimateDT model, the time range, and output directories.
+    b) Download data from ClimateDT
+       A request is created based on user settings. Data is downloaded and saved
+       into the directory given in `datastoragedir`. Next time the same data is
+       requested, the script will use the saved data instead of downloading them
+       again.
+    c) Calculate climatologies
+       This part also calculates the ice drift speed from u and v components.
+    d) Plot the ice climatology
+       The  user can choose between three pre-defined regions (Arctic-wide,
+       Greenland, and Inglefield Bredning).
+       Output is saved into the directory given in `plotdir`.
+
+
+Example
+-------
+
+Activate the conda environment containing your polytope-examples code (see Notes).
+Edit this script according to your user needs.
+Execute the script::
+
+    $ python iceconditions_climatology.py
+
+
+Notes
+-----
+
+This script requires a valid DESP token. This can be created by running 
+python3 ~/polytope_examples_GIT/desp-authentication.py
+in a conda environment with Polytope installed
+(https://github.com/destination-earth-digital-twins/polytope-examples)
+
+
+Attributes
+----------
+
+See explanation of user settings in the first part of the script. For some
+variables, the user can comment-in and comment-out the different options.
+
+
+Author, copyright and license
+-----------------------------
+
+Author: Andrea Gierisch, DMI
+
+Copyright 2025 CSC – IT Center for Science (CSC),
+               Danish Meteorological Institute (DMI),
+               Finnish Meteorological Institute (FMI),
+               Norwegian Meteorological Institute (MetNo),
+               Swedish Meteorological and Hydrological Institute (SMHI),
+               Tallinn University of Technology (TalTech).
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+License: Apache-2.0
+
 """
-
-readin=True
-plotmap=True
-saveplot=True
-
 
 import earthkit.data
 import earthkit.plots
@@ -22,59 +88,60 @@ from utils.download_icedata_c import request_icedata_subarea
 ## User settings
 ################
 
-# Ice parameters to plot
+## Toggle reading, plotting and saving of plots
+readin=True
+plotmap=True
+saveplot=True
+
+## Ice parameters to plot
 plotSIC=True
 plotSIT=False
 plotSNOW=False
 plotICEDRIFT=False
 
-# Ice parameters to download
+## Ice parameters to download
 paramSIC=True
 paramSIT=True
 paramSNOW=True
 paramICEDRIFT=True
 
-# ClimateDT model (ICON or IFS-NEMO)
+## ClimateDT model (ICON or IFS-NEMO)
 # climateDTmodel='IFS-NEMO'
 climateDTmodel='ICON'
 
-# Simulation period ( historical or SSP3-7.0 future scenario)
+## Simulation period ( historical or SSP3-7.0 future scenario)
 # simulationperiod='historical'
 simulationperiod='future'
 
-# For which month should the climatology be produced? (1-12)
+## For which month should the climatology be produced? (1-12)
 month=3
-# for month in [1,3,5,11]:
 
-# First and last year of the climatology to be produced
-# # ICON-historical
-# clima_fromyear=2010
-# clima_toyear=2019
-
-# # IFS-NEMO historical, not available yet
-# clima_fromyear=1990
-# clima_toyear=1999
-
-# ICON/IFS-future
-clima_fromyear=2030
-clima_toyear=2039
+## First and last year of the climatology to be produced
+clima_fromyear=2010 # ICON-historical
+clima_toyear=2019   # ICON-historical
+# clima_fromyear=1990 # IFS-NEMO historical
+# clima_toyear=1999   # IFS-NEMO historical
+# clima_fromyear=2030 # ICON/IFS-future
+# clima_toyear=2039   # ICON/IFS-future
 
 
-# Region to be processed (Greenland or Arctic or Inglefield)
-# mapregion='Greenland'
+## Region to be processed (Greenland or Arctic or Inglefield)
+mapregion='Greenland'
 # mapregion='Arctic'
-mapregion='Inglefield' # This will download/use data for Greenland
+# mapregion='Inglefield' # This will download/use data for Greenland
 
-# Directory to store data files (temporarily):
+## Directory to store downloaded data files (temporarily):
 datastoragedir='/media/volume/data_storage_andrea/'
 
-# Font size for the plot
+## Directory to save plots:
+plotdir='./images/iceparameters/'
+
+## Font size for the plot
 plotfontsize=16
 
 ################
 ## End of user settings
 ################
-
 
 # Checking user input
 ######################
@@ -114,8 +181,6 @@ if readin:
     ######################################
 
     icedata_forechyear=[] # Empty list to collect results for each year
-    #for year in [2018]: # doesn't exist for hist???
-    # for year in [2010]:
     # for year in range(2010,2020):
     for year in range(clima_fromyear,clima_toyear+1):
 
@@ -289,14 +354,8 @@ if plotmap:
             chart = earthkit.plots.Map(domain=qaanaaq_domain)
 
         # Plot the data
-        # chart.grid_cells(fasticeOCCtoplot,interpolate=dict(method='nearest'),
-        # chart.grid_cells(icetoplot,
-        #                 style=earthkit.plots.styles.Style(colors="viridis", extend="both",
-                                                        # levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.]))
         chart.grid_cells(icetoplot,
                         style=plotstyle[icevar])
-
-
 
         chart.coastlines(resolution='high',zorder=3)
         chart.land(resolution='high',zorder=2)
@@ -319,8 +378,8 @@ if plotmap:
         if saveplot:
             import matplotlib.pyplot as plt
             if mapregion=="Inglefield":
-                plt.savefig('./images/iceparameters/climatology-'+icevar[4:]+'_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight', facecolor='k')
+                plt.savefig(plotdir+'/climatology-'+icevar[4:]+'_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight', facecolor='k')
             else:
-                plt.savefig('./images/iceparameters/climatology-'+icevar[4:]+'_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight')
+                plt.savefig(plotdir+'/climatology-'+icevar[4:]+'_'+date_start.strftime("%B")+"_"+str(clima_fromyear)+"-"+str(clima_toyear)+"_"+climateDTmodel+"-"+simulationperiod+'_'+mapregion+'.png', bbox_inches = 'tight')
 
         chart.show()

@@ -1,15 +1,53 @@
 def request_icedata_subarea(activity,experiment,model,date,subarea,param,datadir=None,gridtype=None):
 	"""
-	This function retrieves ClimateDT data
-	#####
-	- If a datadir is given, the function checks whether the desired data is already existing there.
-	- Otherwise it will send a request to Polytope.
-	- If a datadir is given and data was not existing there, the downloaded data will be saved for later use.
+	Function to retrieve ClimateDT data
+	
+    Retrieve data from the ClimateDT simulation. If a DATADIR is given, the function checks whether
+    the desired data is already existing there.  Otherwise it will send a request to Polytope.
+	If a datadir is given and data was not existing there, the downloaded data will be saved for later use.
     
-    Example usage:
+    
+    Example
+    -------
     dataICE=request_icedata_subarea(activity="CMIP6",experiment="hist",model="ICON",
                                     date="2002-02-28",subarea="greenland", param="263001/263003/263004",
                                     datadir="/media/volume/")
+
+    Parameters
+    ----------
+
+
+    Returns
+    -------
+
+
+    Author, copyright and license
+    -----------------------------
+    
+    Authors: Andrea Gierisch, DMI
+             Xinfang Zhang, FMI
+    
+    Copyright 2025 CSC – IT Center for Science (CSC),
+                   Danish Meteorological Institute (DMI),
+                   Finnish Meteorological Institute (FMI),
+                   Norwegian Meteorological Institute (MetNo),
+                   Swedish Meteorological and Hydrological Institute (SMHI),
+                   Tallinn University of Technology (TalTech).
+    
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+    
+           http://www.apache.org/licenses/LICENSE-2.0
+    
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+    
+    License: Apache-2.0
+
 
     """
 	

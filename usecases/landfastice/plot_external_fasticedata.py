@@ -1,23 +1,87 @@
+"""Script to plot landfast ice climatologies from icecharts or HYCOM-CICE model.
 
+plot_external_fasticedata.py
+
+This script can be used to create plots that look similar to the ones created
+by landfastice_climatology.py but containing other data sources, for 
+example for validation/comparison. The datasets need to be prepared 
+beforehand and should contain landfast ice coverage climatology for the 
+desired month and time range.
+
+Sections in this script:
+    a) User settings
+       The user specifies which data should be plotted.
+    b) Settings specific to the dataset
+       Automatic settings like variable names depening on the chosen dataset.
+    c) Plot the landfast ice climatology
+       The  user can choose between two pre-defined regions
+       (Greenland or Inglefield Bredning).
+       Output is saved into the directory given in `plotdir`.
+
+
+Example
+-------
+
+Edit this script according to your needs, and specify the path to the dataset
+as the variable FILEPATH.
+Execute the script::
+
+    $ python plot_external_fasticedata.py
+
+
+Attributes
+----------
+
+See explanation of user settings in the first part of the script. For some
+variables, the user can comment-in and comment-out the different options.
+
+
+Author, copyright and license
+-----------------------------
+
+Author: Andrea Gierisch, DMI
+
+Copyright 2025 CSC – IT Center for Science (CSC),
+               Danish Meteorological Institute (DMI),
+               Finnish Meteorological Institute (FMI),
+               Norwegian Meteorological Institute (MetNo),
+               Swedish Meteorological and Hydrological Institute (SMHI),
+               Tallinn University of Technology (TalTech).
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+License: Apache-2.0
+
+"""
 
 
 import earthkit.data
 import earthkit.plots
-#import earthkit.regrid
 import datetime
 from earthkit.plots.geo import domains
 import numpy as np
 import matplotlib.pyplot as plt
 
+saveplot=True
+
+
 ################
 ## User settings
 ################
 
-# ClimateDT model (ICON or IFS-NEMO)
+# Data source ('icecharts' or 'HYCOM-CICE')
 datasource='icecharts'
 # datasource='HYCOM-CICE'
-
-saveplot=True
 
 # Which month shall be plotted? (1-12)
 month=3
@@ -30,6 +94,19 @@ clima_toyear=2019
 # Region to be processed (Greenland or Arctic)
 mapregion='Greenland'
 # mapregion='Arctic'
+
+# Font size for the plot
+plotfontsize=16
+
+## Directory to save plots:
+plotdir='./images/'
+
+
+################
+## End of user settings
+################
+
+# Settings depending on the input data
 
 if datasource=="icecharts":
     # Filename to plot
@@ -55,26 +132,20 @@ elif datasource=="HYCOM-CICE":
     varLAT='ULAT'
     # Title to be shown on the plot
     plottitle="Average fastice occurrence\n " +"Climatology for " + monthname+" "+str(clima_fromyear)+"-"+str(clima_toyear)+" from "+datasource
+else:
+    raise RuntimeError("DATASOURCE must be 'icecharts' or 'HYCOM-CICE'.")
 
-
-
-# Font size for the plot
-plotfontsize=16
-
-################
-## End of user settings
-################
 
 dataRAW=earthkit.data.from_source("file",filepath)
 plotdata=dataRAW.to_xarray() 
+
 
 ##########################################
 ### Make plot of fastice conditions on a specific day
 ###########################################
 
 
-#### Plot domains
-
+# Plot domains
 import cartopy.crs as ccrs
 crs = ccrs.NorthPolarStereo(central_longitude=10)
 
@@ -95,11 +166,7 @@ qaanaaq_domain = domains.Domain(
     name="Qaanaaq",
 )
 
-
-##########################################
-# ### Plot
-########################################
-
+# Create the plot
 chart = earthkit.plots.Map(domain=greenland_domain)
 
 for mapregion in ["Greenland", "Inglefield"]:
@@ -111,12 +178,6 @@ for mapregion in ["Greenland", "Inglefield"]:
     elif mapregion in ["Qaanaaq","Inglefield"]:
         chart = earthkit.plots.Map(domain=qaanaaq_domain)
 
-    # chart.grid_cells(plotdata,z=varLFI,
-    #                 style=earthkit.plots.styles.Style(colors="jet",
-    #                                                 levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.00001])) # If the last level is 1. instead of 1.000001, then areas with 100% covereage are plotted white instead of red.
-    # chart.grid_cells(plotdata,x=varLON, y=varLAT,z=varLFI,
-    #                 style=earthkit.plots.styles.Style(colors="jet",
-    #                                                 levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.00001])) # If the last level is 1. instead of 1.000001, then areas with 100% covereage are plotted white instead of red.
     chart.grid_cells(plotdata,x=varLON, y=varLAT,z=varLFI,
                      style=earthkit.plots.styles.Style(colors="viridis", extend="both",
                                                     levels=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.]))
@@ -135,9 +196,9 @@ for mapregion in ["Greenland", "Inglefield"]:
     if saveplot:
         import matplotlib.pyplot as plt
         if mapregion=="Inglefield":
-            plt.savefig('./images/fasticeclimatology_'+monthname+'_'+str(clima_fromyear)+'-'+str(clima_toyear)+'_'+datasource+'_'+mapregion+'.png', bbox_inches = 'tight', facecolor='k')
+            plt.savefig(plotdir+'/fasticeclimatology_'+monthname+'_'+str(clima_fromyear)+'-'+str(clima_toyear)+'_'+datasource+'_'+mapregion+'.png', bbox_inches = 'tight', facecolor='k')
         else:
-            plt.savefig('./images/fasticeclimatology_'+monthname+'_'+str(clima_fromyear)+'-'+str(clima_toyear)+'_'+datasource+'_'+mapregion+'.png', bbox_inches = 'tight')
+            plt.savefig(plotdir+'/fasticeclimatology_'+monthname+'_'+str(clima_fromyear)+'-'+str(clima_toyear)+'_'+datasource+'_'+mapregion+'.png', bbox_inches = 'tight')
 
 
 # end for mapregion
