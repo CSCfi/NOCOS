@@ -44,9 +44,36 @@ def avg_fasticecoverage(dataICE,speedthreshold=5e-4,fasticeduration=4):
         avg_fasticecover_grb: Field with values between 0 and 1 indicating the percentage of time 
         that the respective grid cell is covered by fastice during the given time period. 
 
+
+    Author, copyright and license
+    -----------------------------
+    
+    Author: Andrea Gierisch, DMI
+    
+    Copyright 2025 CSC – IT Center for Science (CSC),
+                   Danish Meteorological Institute (DMI),
+                   Finnish Meteorological Institute (FMI),
+                   Norwegian Meteorological Institute (MetNo),
+                   Swedish Meteorological and Hydrological Institute (SMHI),
+                   Tallinn University of Technology (TalTech).
+    
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+    
+           http://www.apache.org/licenses/LICENSE-2.0
+    
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+    
+    License: Apache-2.0
+
+
     """
 
-    speedthreshold=5e-4
     ##### Extract data from grib object
 
     siconc=dataICE[0::3].values
@@ -74,7 +101,9 @@ def avg_fasticecoverage(dataICE,speedthreshold=5e-4,fasticeduration=4):
             return fasticeN
         else:
             # fasticeNm1=np.logical_and(fasticeN[0:-1,:],fasticeN[1:,:]) # Has there been fastice today and yesterday?
-            fasticeNm1=np.logical_and(fasticeN[0:-1],fasticeN[1:]) # Has there been fastice today and yesterday?
+            fasticeNm1=(np.logical_and(fasticeN[0:-1],fasticeN[1:])).astype('float') # Has there been fastice today and yesterday? # float is needed for keeping NaN on land.
+            nanmask=np.logical_and(np.isnan(fasticeN[0:-1]),np.isnan(fasticeN[1:]))
+            fasticeNm1[nanmask]=np.nan
             daysNm1=daysN - 1
             return fastice_for_x_days(fasticeNm1,daysNm1) # Call again for one day less
 

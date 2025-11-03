@@ -56,25 +56,16 @@ Each Use Case delivers a dedicated set of tools, data, and documentation, with d
 
 ## Further Information
 
-- [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin)
+- [NOCOS DT website](https://wiki.eduuni.fi/x/_p2hH)
 
 ---
 
 ## Partners and Funding
 
-### Partners
+NOCOS DT was funded by the [Nordic Council of Ministers](https://www.norden.org/en/nordic-council-ministers). The consortium consisted of [CSC – IT Center for Science](https://csc.fi/en/) (CSC), [Danish Meteorological Institute](https://www.dmi.dk/) (DMI), [Finnish Meteorological Institute](https://en.ilmatieteenlaitos.fi/) (FMI), [Norwegian Meteorological Institute](https://www.met.no/en) (MetNo), [Swedish Meteorological and Hydrological Institute](https://www.smhi.se/en/) (SMHI), and [Tallinn University of Technology](https://taltech.ee/en/) (TalTech).
 
-<!-- Add partner logos below. Example: -->
-![Partner1 Logo](logos/partner1_logo.png)
-![Partner2 Logo](logos/partner2_logo.png)
-<!-- ... add more as needed ... -->
+<img width="100%" alt="Funder and partner logos" src="https://github.com/CSCfi/NOCOS/blob/dev/logos/Funder_partners.png?raw=true"/>
 
-### Coordinated by
 
-<!-- Add coordinator logo below. Example: -->
-![Coordinator Logo](logos/coordinator_logo.png)
 
-### Funded by
 
-<!-- Add funder logo below. Example: -->
-![Funder Logo](logos/funder_logo.png)
