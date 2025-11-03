@@ -110,8 +110,8 @@ paramICEDRIFT=True
 climateDTmodel='ICON'
 
 ## Simulation period ( historical or SSP3-7.0 future scenario)
-# simulationperiod='historical'
-simulationperiod='future'
+simulationperiod='historical'
+# simulationperiod='future'
 
 ## For which month should the climatology be produced? (1-12)
 month=3
