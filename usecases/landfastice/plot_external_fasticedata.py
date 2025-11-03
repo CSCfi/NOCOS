@@ -6,7 +6,8 @@ This script can be used to create plots that look similar to the ones created
 by landfastice_climatology.py but containing other data sources, for 
 example for validation/comparison. The datasets need to be prepared 
 beforehand and should contain landfast ice coverage climatology for the 
-desired month and time range.
+desired month and time range. The script will create plots for Greenland
+and for Inglefield Bredning.
 
 Sections in this script:
     a) User settings
@@ -14,8 +15,7 @@ Sections in this script:
     b) Settings specific to the dataset
        Automatic settings like variable names depening on the chosen dataset.
     c) Plot the landfast ice climatology
-       The  user can choose between two pre-defined regions
-       (Greenland or Inglefield Bredning).
+       Two plots are created, one for Greenland and one for Inglefield Bredning.
        Output is saved into the directory given in `plotdir`.
 
 
@@ -90,10 +90,6 @@ monthname= datetime.datetime(2099,month,15).strftime("%B")
 # First and last year of the climatology to be plotted
 clima_fromyear=2010
 clima_toyear=2019
-
-# Region to be processed (Greenland or Arctic)
-mapregion='Greenland'
-# mapregion='Arctic'
 
 # Font size for the plot
 plotfontsize=16
