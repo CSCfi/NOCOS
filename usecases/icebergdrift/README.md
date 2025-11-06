@@ -2,21 +2,21 @@
 
 ## Description
 
-Here we showcase how the model output of Climate DT simulations can be used as forcing data for 
+Here we showcase how the model output of ClimateDT simulations can be used as forcing data for 
 a model that simulates the drift of icebergs. Icebergs are for example important for
 distributing freshwater in the ocean but they also pose risks for shipping. Therefore, it is
 valuable to investigate whether the drift patters of icebergs might change in a future climate.
 
-The Climate Adaptation Digital Twin simulations (Climate DT) feature high spatial resolution and
+The Climate Adaptation Digital Twin simulations (ClimateDT) feature high spatial resolution and
 are therefore a useful dataset for assessing iceberg drift.
 
 ## The Iceberg Drift Model
 
 This usecase provides scripts to download and prepare ClimateDT data as input/forcing
-for the drift model OpenDrift/OpenBerg. This model is described here:
-https://opendrift.github.io/
-And can be downloaded here:
-https://github.com/OpenDrift/opendrift
+for the drift model OpenDrift/OpenBerg. This model is described here:<br/>
+https://opendrift.github.io/<br/>
+And can be downloaded here:<br/>
+https://github.com/OpenDrift/opendrift<br/>
 
 ## Technical Description
 
