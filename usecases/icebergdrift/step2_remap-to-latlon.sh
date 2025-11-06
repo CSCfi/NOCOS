@@ -4,7 +4,8 @@
 # from healpix grid onto a regular lat/lon grid. 
 #
 # 1) Choose one of the pre-definied domains, BaffinLabra or CoburgLabra. Grid information
-#    will be read from griddes_BaffinLabra.txt and griddes_CoburgLabra.txt, respectively.
+#    will be read from griddescriptions/griddes_BaffinLabra.txt and
+#    griddescriptions/ggriddes_CoburgLabra.txt, respectively.
 # 2) Define the input directory (rawdatdir) where the output of
 #    download_ClimateDT-for-icebergdrift.py is located.
 # 3) The script will treat all files *${domain}*_healpix.nc in the input directory.
@@ -57,7 +58,7 @@ for filename in ${rawdatdir}/*${domain}*_healpix.nc
 do
 	outname=${filename/_healpix.nc/_orivarnames.nc}
 	echo Remapping $filename to $outname ...
-	cdo remapdis,griddes_${domain}.txt  $filename $outname 
+	cdo remapdis,griddescriptions/griddes_${domain}.txt  $filename $outname 
 	echo Moving $filename to ${rawdatdir}/healpix/
 	mv $filename ${rawdatdir}/healpix/
 done
