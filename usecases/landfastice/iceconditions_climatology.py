@@ -331,7 +331,7 @@ if plotmap:
     plotstyle={'avg_sithick': earthkit.plots.styles.Style(levels=np.arange(0, 3.5, 0.25), colors="inferno", units="m", extend="both"), 
                'avg_siconc': earthkit.plots.styles.Style(levels=np.arange(0, 1, 0.1), colors="magma", units="fraction", extend="both"), 
                'avg_snvol': earthkit.plots.styles.Style(levels=np.arange(0, 0.8, 0.1), colors="cividis", units="m3/m2", extend="both"), 
-               'avg_icespeed': earthkit.plots.styles.Style(levels=np.arange(0, 0.5, 0.05), colors="plasma", units="m/s", extend="both"), 
+               'avg_icespeed': earthkit.plots.styles.Style(levels=np.arange(0, 0.5, 0.05), colors="plasma", units="m/s", extend="max"),
                }
     plotlabel={'avg_sithick': 'Sea ice thickness [m]',
                'avg_siconc': 'Sea ice concentration [fraction]',
