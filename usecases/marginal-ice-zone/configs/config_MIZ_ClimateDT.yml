@@ -1,0 +1,45 @@
+# Name of the input file(s) containing ice information
+# You can specify one filename or a string glob in the form "path/to/my/files/*.nc" to merge multiple files (e.g. along time dimension).
+#ice_filename: /home/ang/ana/rio_DMI/test/iceh_inst.2020-04-07-00000.nc
+#ice_filename: /home/ang/ana/rio_DMI/test/iceh_inst.20*.nc
+#ice_filename: /dmidata/projects/hycom-cice/reruns/NAAg/assim/v7_long/2020*/iceh_inst.2020-??-02-00000.nc
+ice_folder: /nobackup/forsk/sm_kegwa/data/ClimateDT/
+
+# Information about variable oordinates
+coordinates:
+   ncat: 1                # Number of ice thickness categories
+   ncat_name: nc          # Name of ncat dimension (if ncat > 1)
+   time_name:             # Name of time dimension
+   lat_name:  latitude    # Name of latitude dimension
+   lon_name:  longitude   # Name of longitude dimension
+
+# Which (relevant) variables are contained in your file?
+variables:
+   longitude:                   # longitude of the grid (2D, only for plotting)
+   latitude:                    # latitude of the grid (2D, only for plotting)
+   siconc_name:  avg_siconc     # Percentage of grid cell covered by sea ice
+   sithick_name: avg_sithick    # Actual (floe) thickness of sea ice (not volume)
+   sivol_name:                  # Total volume of sea ice divided by grid-cell area
+   siitdconc_name:              # Percentage of grid cell covered by each ice-thickness categor
+   siitdthick_name:             # Actual (floe) thickness of sea ice in each category
+   siitdvol_name:               # Ice volume in each categroy divided by whole grid cell area
+   siage_name:                  # Age of sea ice
+   sisali_name:                 # Mean sea-ice salinity of all sea ice in grid cell
+
+# Method how MIZ should be calculated
+MIZmethod:
+   Ltraditional: True    # Calculate MIZ purely based on sic
+   Ldynamical:   False     
+
+# Select time or space range
+selectdata: 
+   sensors: [ICON_future, ICON_hist, IFS-NEMO_future]
+
+# Output
+output:
+   filename_automatic: True
+   filename:            # *.nc (Only the name, not a full path)
+   output_folder: /nobackup/forsk/sm_kegwa/data/ClimateDT/output/miz   # If different from working directory
+   title:         MIZ from ClimateDT
+
+
