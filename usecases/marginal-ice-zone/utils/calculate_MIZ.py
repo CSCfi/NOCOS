@@ -28,7 +28,7 @@ def ice_classes(icedata,configs):
 
 
 #=====================================================================
-def grid_area(icedata,lonlat=True):
+def grid_area(icedata):
 
     lon = icedata.longitude
     lat = icedata.latitude
@@ -40,7 +40,7 @@ def grid_area(icedata,lonlat=True):
 
     dlon, dlat = Lon[0,1] - Lon[0,0], Lat[1,0] - Lat[0,0]
         
-    if lonlat:
+    if 'degree' in lon.units:
        ldg = 6370 * 2 * np.pi / 360
        area = np.ones(Lon.shape) * dlon * np.abs(dlat) * np.cos(Lat*np.pi/180) * ldg**2
     else:
