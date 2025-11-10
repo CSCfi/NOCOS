@@ -33,12 +33,13 @@ MIZmethod:
 
 # Select time or space range
 selectdata: 
-   sensors: [ICON_future, ICON_hist, IFS-NEMO_future]
-
+#   sensors: [ICON_future, ICON_hist, IFS-NEMO_future]
+   sensors: [ICON_future]
+   
 # Output
 output:
-   filename_automatic: True
-   filename:            # *.nc (Only the name, not a full path)
+   filename_automatic: False
+   filename:  miz_*.nc    # *.nc (Only the name, not a full path)
    output_folder: /nobackup/forsk/sm_kegwa/data/ClimateDT/output/miz   # If different from working directory
    title:         MIZ from ClimateDT
 
