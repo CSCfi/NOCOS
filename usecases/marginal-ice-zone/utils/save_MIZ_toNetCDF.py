@@ -39,7 +39,7 @@ def save_toNetcdf(mizdata,icedata,configs):
     # Set global attributes of the netcdf file
     mizds.attrs={
     'title':configs['output']['title'],
-    'histroy':'Created by MIZ_' + configs['usecase'] + '.py on '+datetime.today().strftime("%Y-%m-%d"),
+    'histroy':'Created by MIZ_' + configs['dataSource'] + '.py on '+datetime.today().strftime("%Y-%m-%d"),
     'description':'Used MIZ calculation method: '+mizmethod+'; number of ice categories: '+str(configs['coordinates']['ncat']),
     'institution':"Norwegian Meteorological Institutes, MetNO",
     'references':'https://doi.org/10.5194/tc-17-4487-2023'

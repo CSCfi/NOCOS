@@ -20,7 +20,7 @@ def read_configfile(*argv):
 
     with open('configs/' + config_filename,"r") as ymlfile:
          configs = yaml.load(ymlfile,  Loader=yaml.Loader)
-    if len(argv) == 1: configs['usecase'] = argv[0]
+    if len(argv) == 1: configs['dataSource'] = argv[0]
     
 # Derived setting variables and sanity checks
 ###############################################

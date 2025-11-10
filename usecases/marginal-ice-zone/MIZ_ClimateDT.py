@@ -16,10 +16,10 @@ from read_ice_data import read_ice_data
 from utils.save_MIZ_toNetCDF import save_toNetcdf
 from utils.calculate_MIZ import calc_MIZ
 
-usecase = 'ClimateDT'
+dataSource = 'ClimateDT'
 
 # Read config file
-configs=read_configfile(usecase)
+configs=read_configfile(dataSource)
 
 # Read ice data
 for sensor in configs['selectdata']['sensors']:
