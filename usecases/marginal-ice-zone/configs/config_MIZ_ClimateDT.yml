@@ -33,8 +33,7 @@ MIZmethod:
 
 # Select time or space range
 selectdata: 
-#   sensors: [ICON_future, ICON_hist, IFS-NEMO_future]
-   sensors: [ICON_future]
+   sensors: [ICON_future, ICON_hist, IFS-NEMO_future]
    
 # Output
 output:
