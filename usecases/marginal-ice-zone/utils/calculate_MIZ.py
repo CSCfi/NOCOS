@@ -28,7 +28,7 @@ def ice_classes(icedata,configs):
 
 
 #=====================================================================
-def grid_area(icedata):
+def grid_area(icedata,miz):
 
     lon = icedata.longitude
     lat = icedata.latitude
@@ -46,7 +46,10 @@ def grid_area(icedata):
     else:
        area = np.ones(Lon.shape) * dlon * dlat
 
-    return(area)
+    miz_ext  = area[miz == 1].sum()   
+    mean_lat = Lat[miz == 1].mean()
+
+    return(miz_ext,mean_lat)
 
 #=====================================================================
 def traditional_MIZ(icedata,configs):
@@ -67,9 +70,9 @@ def traditional_MIZ(icedata,configs):
     # compacted pack ice
     miz[siconc > 0.8] = 2
     
-    area = grid_area(icedata)[miz == 1].sum()    
-
-    return miz, area
+    miz_ext, mean_lat = grid_area(icedata,miz)
+    
+    return miz, miz_ext, mean_lat
 
 #=====================================================================
 def dynamical_MIZ(icedata,configs):
@@ -93,21 +96,19 @@ def dynamical_MIZ(icedata,configs):
     miz[(siconc >= 0.1) & (sithick > 2.0)] = 2
     miz[(siconc > 0.85) & (sithick > 10.5 - 10.*siconc)] = 2
 
-    area = grid_area(icedata)[miz == 1].sum()    
-
-    return(miz, area)
+    miz_ext, mean_lat = grid_area(icedata,miz)
+    
+    return miz, miz_ext, mean_lat
 
 #=====================================================================
 def calc_MIZ(icedata,configs):
 
-    mizmethod=[i for i in configs['MIZmethod'] if configs['MIZmethod'][i]==True][0]
-
     if configs['MIZmethod']['Ltraditional'] == True:
-       miz, mize = traditional_MIZ(icedata,configs)
+       miz, miz_ext, mean_lat = traditional_MIZ(icedata,configs)
     elif configs['MIZmethod']['Ldynamical'] == True:
-       miz, mize = dynamical_MIZ(icedata,configs)
+       miz, miz_ext, mean_lat = dynamical_MIZ(icedata,configs)
        
-    return(miz,mize)
+    return(miz,miz_ext,mean_lat)
     
 #=====================================================================
 if __name__ == "__main__":
