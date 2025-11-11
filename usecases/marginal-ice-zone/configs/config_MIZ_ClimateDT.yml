@@ -33,8 +33,10 @@ MIZmethod:
 
 # Select time or space range
 selectdata: 
-   datasets: [ICON_future, ICON_historical, IFS-NEMO_future]
-   domain: Arctic
+   datasets:   [ICON, IFS-NEMO]
+   domain:     Arctic
+   year_start: 2010
+   year_end:   2019
    
 # Output
 output:
