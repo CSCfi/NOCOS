@@ -33,7 +33,8 @@ MIZmethod:
 
 # Select time or space range
 selectdata: 
-   sensors: [ICON_future, ICON_hist, IFS-NEMO_future]
+   datasets: [ICON_future, ICON_historical, IFS-NEMO_future]
+   domain: Arctic
    
 # Output
 output:

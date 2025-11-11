@@ -13,7 +13,7 @@ def save_toNetcdf(mizdata,icedata,configs):
         outfile = configs['output']['output_folder']+'/MIZ-' + mizmethod[1:] +'_' +  \
                   os.path.basename(configs['ice_filename']).replace('*','XXX').replace('?','X')
     else:
-        outfile = configs['output']['output_folder'] + '/' + configs['sensor'] + '_miz_' + configs['date'] + '.nc'
+        outfile = configs['output']['output_folder'] + '/' + configs['dataset'] + '_miz_' + configs['date'] + '.nc'
     
     # Make an empty dataset with basic coordinates for the netcdf file, copied from the icedata-file
     if configs["coordinates"]['time_name'] is not None:

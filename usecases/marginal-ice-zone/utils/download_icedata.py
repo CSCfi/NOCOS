@@ -8,8 +8,8 @@ def request_icedata_subarea(activity,experiment,model,date,subarea,param,datadir
     
     Example usage:
     dataICE=request_icedata_subarea(activity="CMIP6",experiment="hist",model="ICON",
-                                    date="2002-02-28",subarea="greenland", param="263001/263003/263004",
-                                    datadir="/media/volume/")
+            date="2002-02-28",subarea="greenland", param="263001/263003/263004",
+            datadir="/media/volume/")
 
     """
 	

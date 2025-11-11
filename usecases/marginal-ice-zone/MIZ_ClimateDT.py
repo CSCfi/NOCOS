@@ -23,15 +23,15 @@ dataSource = 'ClimateDT'
 configs=read_configfile(dataSource)
 
 # Read ice data
-for sensor in configs['selectdata']['sensors']:
-    print('Processing ' + sensor + ':')
+for dataset in configs['selectdata']['datasets']:
+    print('Processing ' + dataset + ':')
 
-    if 'future' in sensor:
+    if 'future' in dataset:
        year_start, year_end = 2030, 2039
-    elif 'hist' in sensor:
+    elif 'hist' in dataset:
        year_start, year_end = 2010, 2019
     else:
-       print('Sensor not available, exit ...')
+       print('dataset not available, exit ...')
        sys.exit()
     
     dates = []
@@ -46,9 +46,9 @@ for sensor in configs['selectdata']['sensors']:
             print('   processing date ' + str(year*100 + month) + ' ...')
             try:
                 configs['date'] = str(year*100 + month)
-                configs['sensor'] = sensor
-                configs['ice_filename'] = os.path.join(configs['ice_folder'],sensor,
-                   sensor.split('_')[0] + '_monthly_mean_' + configs['date'] + '.nc')
+                configs['dataset'] = dataset
+                configs['ice_filename'] = os.path.join(configs['ice_folder'],dataset,
+                   dataset.split('_')[0] + '_monthly_mean_' + configs['date'] + '.nc')
                 icedata=read_ice_data(configs)
                 
                 # Calculate MIZ
@@ -56,7 +56,7 @@ for sensor in configs['selectdata']['sensors']:
                    raise NotImplementedError()
                 elif configs['multiCAT']==False:
                    mizdata, miz_ext, mean_lat = calc_MIZ(icedata,configs)
-                print(sensor, year, month, miz_ext, mean_lat)
+                print(dataset, year, month, miz_ext, mean_lat)
                 df.loc[str(100*year+month),['miz_ext', 'mean_lat']] = [miz_ext, mean_lat]
            
                 # Save MIZ data to netcdf file
@@ -66,6 +66,6 @@ for sensor in configs['selectdata']['sensors']:
                 print('     No data in ' + str(year*100+month))
                 df.loc[str(100*year+month),['miz_ext', 'mean_lat']] = ['NaN', 'NaN']
             
-    df.to_csv(os.path.join(configs['output']['output_folder'], sensor+'_stats.txt'), 
+    df.to_csv(os.path.join(configs['output']['output_folder'], dataset+'_stats.txt'), 
               sep='\t', index=True,header=False)
 

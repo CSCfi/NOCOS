@@ -67,7 +67,7 @@ def read_configfile(*argv):
        os.makedirs(configs['output']['output_folder'])
         
 # d) set ice_filename
-  # configs['ice_filename'] = configs['ice_folder'] + '/' + configs['selectdata']['sensor'] \
+  # configs['ice_filename'] = configs['ice_folder'] + '/' + configs['selectdata']['dataset'] \
   #                         + '/obs_' + str(configs['selectdata']['date']) + '.nc'
     
     print("These are the configurations you have chosen:")
