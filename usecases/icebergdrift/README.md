@@ -1,4 +1,4 @@
-# Use Case: Iceberg Drift
+# Use Case: Iceberg drift
 
 ## Description
 
@@ -10,7 +10,7 @@ valuable to investigate whether the drift patters of icebergs might change in a 
 The Climate Adaptation Digital Twin simulations (ClimateDT) feature high spatial resolution and
 are therefore a useful dataset for assessing iceberg drift.
 
-## The Iceberg Drift Model
+## The iceberg drift model
 
 This usecase provides scripts to download and prepare ClimateDT data as input/forcing
 for the drift model OpenDrift/OpenBerg. This model is described here:<br/>
@@ -18,7 +18,7 @@ https://opendrift.github.io/<br/>
 And can be downloaded here:<br/>
 https://github.com/OpenDrift/opendrift<br/>
 
-## Technical Description
+## Technical description
 
 This use case demonstrates how forcing data for OpenDrift can be
     a) downloaded through Polytope from ClimateDT
@@ -38,7 +38,6 @@ Following variables are processed:
 
 ### Description of files
 
-<!-- List and link the main scripts, notebooks, and tools used in this use case -->
 1) [download_ClimateDT-for-icebergdrift.py](download_ClimateDT-for-icebergdrift.py) – Downloads relevant parameters from ClimateDT on healpix grid and saves the output as NetCDF files.
 - [step2_remap-to-latlon.sh](step2_remap-to-latlon.sh) – Bash script for remapping NetCDF files from healpix grid to regular lat/lon grid.
 - [griddescriptions/](griddescriptions/) – Grid description files used by cdo (in step2) to remap from healpix grid to a regular lat/lon grid.
@@ -52,7 +51,6 @@ The bash scripts require `cdo` and `nco` (`ncatted`).
 
 ---
 
-## Footer
+Back to the [NOCOS DT GitHub front page](../../README.md).  
 
-Back to [NOCOS github front page](../../README.md).  
-For more information about NOCOS project, see the [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin).
+For more information about the NOCOS DT project, see the [NOCOS DT website](https://wiki.eduuni.fi/x/_p2hH).
