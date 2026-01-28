@@ -22,12 +22,6 @@ Copernicus, ECMWF and DMI HYCOM-CICE sea ice forecasting products have been used
 
 The Risk Index Outcome is a new parameter in modeling, decided jointly by ice condition and ship class. Traditionally, the ice condition includes sea ice concentration and thickness. Salinity and age are introduced in the innovative RIO calculation algorithm developed by NOCOS DT as novel parameters, to better determine the POLARIS ice type, providing a more accurate RIO outcome.
 
-## Software description
-
-- [script1.py](script1.py)
-- [notebook_demo.ipynb](notebook_demo.ipynb)
-- [other_tool.py](other_tool.py)
-
 ---
 
 Back to the [NOCOS DT GitHub front page](../../README.md).  
