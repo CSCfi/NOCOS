@@ -24,13 +24,12 @@ The Risk Index Outcome is a new parameter in modeling, decided jointly by ice co
 
 ## Software description
 
-- [script1.py](script1.py) – [Short description]
-- [notebook_demo.ipynb](notebook_demo.ipynb) – [Short description]
-- [other_tool.py](other_tool.py) – [Short description]
+- [script1.py](script1.py)
+- [notebook_demo.ipynb](notebook_demo.ipynb)
+- [other_tool.py](other_tool.py)
 
 ---
 
-## Footer
-
 Back to the [NOCOS DT GitHub front page](../../README.md).  
+
 For more information about the NOCOS DT project, see the [NOCOS DT website](https://wiki.eduuni.fi/x/_p2hH).
