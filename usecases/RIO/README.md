@@ -12,7 +12,7 @@ RIO provides risk assessment and operational support for Arctic shipping based o
 
 ## Overview
 
-![Overview image](images/RIO_poster.png)
+![Overview image](../RIO_old/images/RIO_poster.png)
 
 ## Models and data
 
