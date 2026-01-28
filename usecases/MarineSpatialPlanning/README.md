@@ -1,4 +1,4 @@
-# Use Case: Marine Spatial Planning
+# Use case: Marine Spatial Planning
 
 ## Description
 
@@ -14,24 +14,21 @@ This use case provides an efficient Python framework for aggregating, processing
 ### References
 - ➤ Wåhlström et al. Projected climate change impact on a coastal sea—As significant as all current pressures combined. Global change biology, 28(17), 2022
 
-## Overview Image
+## Overview
 
 ![Overview image](images/Example.png)
 
-## Technical Description
+## Technical description
 
-<!-- Place holder for technical description -->
 This case provides a first step towards using the Climate DT data for Marine Spatial Planning. A more advanced tool for data handling not yet linked to the Climate DT is available upon request on [SMHI GitLab](https://git.smhi.se/fou-oce-public/doris).
 
-## Software Description
+## Software description
 
-<!-- List and link the main scripts, notebooks, and tools used in this use case -->
 - [ExploreDataLake.ipynb](ExploreDataLake.ipynb) – Access the data and plot several physical ocean variables
 - [ExploreIceThicknessData.ipynb](ExploreIceThicknessData.ipynb) – Explore more specifically the ice thickness data available
 
 ---
 
-## Footer
+Back to the [NOCOS DT GitHub front page](../../README.md).  
 
-Back to [NOCOS github front page](../../README.md).  
-For more information about NOCOS project, see the [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin).
+For more information about the NOCOS DT project, see the [NOCOS DT website](https://wiki.eduuni.fi/x/_p2hH).
