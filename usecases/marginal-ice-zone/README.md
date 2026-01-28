@@ -1,10 +1,6 @@
-# Use Case: Marginal Ice Zone (MIZ)
+# Use case: Marginal ice zone
 
 ## Description
-
-<!-- Place holder for general description of the use case -->
-[Add a brief summary of what this use case addresses and why it is important.]
-## Marginal Ice Zone (MIZ)
 
 The Marginal Ice Zone (MIZ) is a transition region between open water and dense pack ice, shaped by dynamic interactions among the atmosphere, ocean, sea ice, and waves.  
 MIZ is typically more navigable than the inner pack ice, making it important for maritime operations.
@@ -14,33 +10,24 @@ MIZ is typically more navigable than the inner pack ice, making it important for
 
 Understanding and identifying the MIZ supports navigation and research on ocean-ice interactions.
 
-### Refferences
+### References
 - ➤   Wang et al. Local analytical optimal nudging for assimilating AMSR2 sea ice concentration in a high-resolution pan-Arctic coupled ocean (HYCOM 2.2.98) and sea ice (CICE 5.1.2) model, The Cryosphere, 2023 
 - ➤   Wang et al. Multisensor data fusion of operational sea ice observations, Frontiers in Marine Science, 2024
 
-## Overview Image
+## Overview
 
-<!-- Link to image illustrating the use case (optional) -->
-![Overview image](images/MIZ_poster.png) <!-- Replace with actual image path or link -->
+![Overview image](images/MIZ_poster.png)
 
-## Technical Description
+## Models and data
 
-<!-- Place holder for technical description -->
-[Describe the scientific, computational, or methodological background relevant for this use case.  
-Include information about the data used, processing steps, and any unique aspects.]
-
-## Software Description
-
-<!-- List and link the main scripts, notebooks, and tools used in this use case -->
-- [script1.py](script1.py) – [Short description]
-- [notebook_demo.ipynb](notebook_demo.ipynb) – [Short description]
-- [other_tool.py](other_tool.py) – [Short description]
-
-<!-- Add or remove items as needed -->
+- CMEMS operational reanalysis and forecast products including NEMO, TOPAZ5 and neXtSIM
+- Norwegian high-resolution pan-Arctic coupled model NorHAPS
+- Climate DT models IFS-NEMO, ICON
+- Definition of criteria for the MIZ, and development of methods to derive MIZ properties from standard variables
+- Calculation of spatial distribution of MIZ from existing data sources (e.g., Copernicus, Climate DT)
 
 ---
 
-## Footer
+Back to the [NOCOS DT GitHub front page](../../README.md).  
 
-Back to [NOCOS github front page](../../README.md).  
-For more information about NOCOS project, see the [NOCOS webpage](https://wiki.eduuni.fi/spaces/CSCNOCOS/pages/480353786/Nordic+Cryosphere+Digital+Twin).
+For more information about the NOCOS DT project, see the [NOCOS DT website](https://wiki.eduuni.fi/x/_p2hH).
